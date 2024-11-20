@@ -1,26 +1,34 @@
 import styled from 'styled-components'
 
 export const GalleryItemContainer = styled.div`
-  max-height: 416px;
+  max-height: 514px;
+  max-width: 387px;
+  position: relative;
   margin: 0 auto;
 `
 
 export const GalleryImg = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 444px;
+  z-index: 1;
 `
 
 export const GalleryDetails = styled.div`
+  position: absolute;
+  bottom: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  gap: 16px;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid #f0f1f1;
-  padding: 16px;
-  width: 100%;
-  height: auto;
+  padding: 32px 24px;
+  width: 334px;
+  height: 132px;
   background: #fff;
+  z-index: 2;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
 `
 
 export const TextDetails = styled.div`

@@ -11,7 +11,6 @@ export const Pagination = styled.div`
     color: white;
     border: none;
     cursor: pointer;
-
     &:disabled {
       background-color: #ccc;
     }

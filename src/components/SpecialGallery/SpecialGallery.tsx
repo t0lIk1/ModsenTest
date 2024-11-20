@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import art from '../../assets/img/image 1.png'
-import GalleryItem from '../GalleryItem/GalleryItem.tsx'
+import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem.tsx'
 import { Container } from '../../style/Container.styles.ts' // Assuming this is already styled
 import Pagination from '../Pagination/Pagination.tsx' // Import the Pagination component
 import {
@@ -43,11 +43,11 @@ const SpecialGallery = () => {
             <h3>Topics for you</h3>
             <span>Our Special Gallery</span>
           </TitleWrapper>
-          <GalleryGrid className="gallery-grid">
+          <GalleryGrid>
             {currentItems.map((item, index) => (
               // eslint-disable-next-line
               <a>
-                <GalleryItem
+                <SpecialGalleryItem
                   key={index}
                   img={item.img}
                   title={item.title}

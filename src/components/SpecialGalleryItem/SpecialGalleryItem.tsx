@@ -5,21 +5,21 @@ import {
   GalleryItemContainer,
   FavoriteButton,
   TextDetails
-} from './GalleryItem.styles.ts'
+} from './SpecialGalleryItem.styles.ts'
 import favorite from '../../assets/Vector.svg'
 
 interface IGalleryProps {
   title: string
   name: string
   status: string
-  img: string
+  img: string // Тип string подходит для пути к изображению
 }
 
-const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
+const SpecialGalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
   return (
     <GalleryItemContainer>
+      <GalleryImg src={img} alt="Artwork" />
       <GalleryDetails>
-        <GalleryImg src={img} alt="Artwork" />
         <TextDetails>
           <h3>{title}</h3>
           <span>{name}</span>
@@ -33,4 +33,4 @@ const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
   )
 }
 
-export default GalleryItem
+export default SpecialGalleryItem
