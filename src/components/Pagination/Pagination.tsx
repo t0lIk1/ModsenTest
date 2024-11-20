@@ -1,10 +1,13 @@
+// Pagination.tsx
+import React from 'react'
+
 interface PaginationProps {
   currentPage: number
   totalPages: number
   onPageChange: (page: number) => void
 }
 
-const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers: number[] = []
 
   // Generate page numbers from 1 to totalPages

@@ -1,11 +1,11 @@
 import { Container } from '../../style/Container.styles.ts'
-import { FooterContainer, Logo } from './Footer.ts'
+import { FooterContainer, Logo, FooterWrapper } from './Footer.styles.ts'
 import MuseumLogo from '../../assets/museum-logo(black).svg'
 import ModsenLogo from '../../assets/logo modsen-02 2.svg'
 
 const Footer = () => {
   return (
-    <footer>
+    <FooterWrapper>
       <Container>
         <FooterContainer>
           <Logo>
@@ -20,7 +20,7 @@ const Footer = () => {
           </Logo>
         </FooterContainer>
       </Container>
-    </footer>
+    </FooterWrapper>
   )
 }
 

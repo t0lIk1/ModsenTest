@@ -1,8 +1,5 @@
+// Gallery.styles.ts
 import styled from 'styled-components'
-
-export const GallerySection = styled.section`
-  background-color: #f9f9f9;
-`
 
 export const GalleryWrapper = styled.div``
 

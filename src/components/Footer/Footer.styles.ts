@@ -16,3 +16,7 @@ export const Logo = styled.div`
     text-decoration: none;
   }
 `
+
+export const FooterWrapper = styled.div`
+  background-color: #ffff;
+`

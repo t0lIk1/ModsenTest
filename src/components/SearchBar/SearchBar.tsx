@@ -1,5 +1,4 @@
 import {
-  HomeHeader,
   SearchBarContainer,
   SearchBarInputWrapper,
   SearchBarInput,
@@ -7,14 +6,12 @@ import {
 } from './SearchBar.styles.ts'
 import { Container } from '../../style/Container.styles.ts'
 import Search from '../../assets/search.svg'
-
+import Title from '../Title/Title.tsx'
 const SearchBar = () => {
   return (
     <Container>
       <SearchBarContainer>
-        <HomeHeader>
-          Let`&aposs Find Some <span>Art</span> Here!
-        </HomeHeader>
+        <Title mainText="Let's Find Some Art" subText="Here!" />
         <SearchBarInputWrapper>
           <SearchBarInput placeholder="Search art, artist, work..." />
           <SearchIcon src={Search} alt="Search Icon" />

@@ -1,15 +1,19 @@
+// NavBar.styles.ts
 import styled from 'styled-components'
 
-export const Nav = styled.nav`
+export const NavBarWrapper = styled.nav`
   background: linear-gradient(90deg, #343333 16.73%, #484848 58.63%, #282828 98.63%);
   color: #fff;
+  font-family: 'Inter', sans-serif;
 `
-export const Block = styled.div`
+
+export const NavBarBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 0;
 `
+
 export const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
@@ -26,6 +30,7 @@ export const Menu = styled.div`
 
   a {
     display: flex;
+    align-items: center;
     gap: 4px;
     text-decoration: none;
     color: #fff;
@@ -33,7 +38,7 @@ export const Menu = styled.div`
 
     &:hover {
       color: #ffa500; /* Оранжевый цвет при наведении */
-      transition: 0.3s ease-in-out;
+      transition: color 0.3s ease-in-out;
     }
   }
 `

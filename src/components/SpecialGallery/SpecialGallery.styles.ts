@@ -1,3 +1,4 @@
+// SpecialGallery.styles.ts
 import styled from 'styled-components'
 
 // Style for the section
@@ -31,20 +32,16 @@ export const TitleWrapper = styled.div`
 // Style for the grid of gallery items
 export const GalleryGrid = styled.div`
   display: flex;
-  transition: transform 0.3s ease-in-out;
   justify-content: space-between;
+
   a {
     cursor: pointer;
+
     &:hover {
-      scale: 101%;
-      transition: 0.3s ease;
+      transform: scale(1.01);
+      transition: transform 0.3s ease-in-out;
     }
   }
-`
-
-export const GalleryItemWrapper = styled.div`
-  flex: 0 0 33.33%; /* Show 3 items per row */
-  padding: 10px;
 `
 
 export const PaginationWrapper = styled.div`
@@ -63,6 +60,7 @@ export const PaginationWrapper = styled.div`
       background: transparent;
       cursor: pointer;
       text-align: center;
+
       &:disabled {
         background-color: #ddd;
         cursor: not-allowed;
@@ -79,27 +77,5 @@ export const PaginationWrapper = styled.div`
         transition: 0.3s ease-in-out;
       }
     }
-  }
-`
-
-export const Pagination = styled.div`
-  display: grid;
-  justify-content: center;
-  gap: 10px;
-
-  button {
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-
-    &:disabled {
-      background-color: #ccc;
-    }
-  }
-
-  span {
-    padding: 10px;
   }
 `

@@ -1,31 +1,33 @@
 import React from 'react'
-import { Nav, Logo, Menu, Block } from './NavBar.styles'
-import { Container } from '../../style/Container.styles.ts'
+import { NavBarWrapper, Logo, Menu, NavBarBlock } from './NavBar.styles'
+import { Container } from '../../style/Container.styles'
 import MuseumLogo from '../../assets/museum-logo(white).svg'
 import Favorite from '../../assets/Vector.svg'
+import Home from '../../assets/home.svg'
 
 const NavBar: React.FC = () => {
   return (
-    <header>
-      <Nav>
-        <Container>
-          <Block>
-            <Logo>
-              <a href="/">
-                <img src={MuseumLogo} alt="Museum of Art" />
-              </a>
-            </Logo>
-            <Menu>
-              <a href="/">Home</a>
-              <a href="/favorites">
-                <img src={Favorite} alt="" />
-                <span>Your Favorites</span>
-              </a>
-            </Menu>
-          </Block>
-        </Container>
-      </Nav>
-    </header>
+    <NavBarWrapper>
+      <Container>
+        <NavBarBlock>
+          <Logo>
+            <a href="/">
+              <img src={MuseumLogo} alt="Museum of Art" />
+            </a>
+          </Logo>
+          <Menu>
+            <a href="/">
+              <img src={Home} alt="Favorite Icon" />
+              <span>Home</span>
+            </a>
+            <a href="/favorites">
+              <img src={Favorite} alt="Favorite Icon" />
+              <span>Your Favorites</span>
+            </a>
+          </Menu>
+        </NavBarBlock>
+      </Container>
+    </NavBarWrapper>
   )
 }
 

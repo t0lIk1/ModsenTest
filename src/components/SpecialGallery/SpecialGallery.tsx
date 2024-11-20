@@ -1,33 +1,29 @@
+// SpecialGallery.tsx
 import { useState } from 'react'
 import art from '../../assets/img/image 1.png'
-import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem.tsx'
-import { Container } from '../../style/Container.styles.ts' // Assuming this is already styled
-import Pagination from '../Pagination/Pagination.tsx' // Import the Pagination component
+import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
+import { Container } from '../../style/Container.styles'
+import Pagination from '../Pagination/Pagination'
 import {
   GallerySection,
   GalleryWrapper,
   TitleWrapper,
   GalleryGrid,
   PaginationWrapper
-} from './SpecialGallery.styles.ts'
+} from './SpecialGallery.styles'
 
 const data = [
   { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
   { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
   { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
   { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' }
-  // Add more data if needed
 ]
 
-const itemsPerPage = 3 // Number of items per page
+const itemsPerPage = 3
 
-const SpecialGallery = () => {
+const SpecialGallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
-
-  // Calculate the total number of pages
   const totalPages = Math.ceil(data.length / itemsPerPage)
-
-  // Get the items to display on the current page
   const currentItems = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   const handlePageChange = (page: number) => {
@@ -45,10 +41,8 @@ const SpecialGallery = () => {
           </TitleWrapper>
           <GalleryGrid>
             {currentItems.map((item, index) => (
-              // eslint-disable-next-line
-              <a>
+              <a href="/" key={index}>
                 <SpecialGalleryItem
-                  key={index}
                   img={item.img}
                   title={item.title}
                   name={item.name}
