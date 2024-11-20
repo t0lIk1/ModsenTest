@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { NavBarWrapper, Logo, Menu, NavBarBlock } from './NavBar.styles'
 import { Container } from '../../style/Container.styles'
 import MuseumLogo from '../../assets/museum-logo(white).svg'
@@ -11,19 +12,19 @@ const NavBar: React.FC = () => {
       <Container>
         <NavBarBlock>
           <Logo>
-            <a href="/">
+            <Link to="/">
               <img src={MuseumLogo} alt="Museum of Art" />
-            </a>
+            </Link>
           </Logo>
           <Menu>
-            <a href="/">
-              <img src={Home} alt="Favorite Icon" />
+            <Link to="/">
+              <img src={Home} alt="Home Icon" />
               <span>Home</span>
-            </a>
-            <a href="/favorites">
+            </Link>
+            <Link to="/favorites">
               <img src={Favorite} alt="Favorite Icon" />
               <span>Your Favorites</span>
-            </a>
+            </Link>
           </Menu>
         </NavBarBlock>
       </Container>

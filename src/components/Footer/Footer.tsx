@@ -2,6 +2,7 @@ import { Container } from '../../style/Container.styles.ts'
 import { FooterContainer, Logo, FooterWrapper } from './Footer.styles.ts'
 import MuseumLogo from '../../assets/museum-logo(black).svg'
 import ModsenLogo from '../../assets/logo modsen-02 2.svg'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -9,14 +10,14 @@ const Footer = () => {
       <Container>
         <FooterContainer>
           <Logo>
-            <a href="/">
+            <Link to="/">
               <img src={MuseumLogo} alt="ModsenArtMuseum" />
-            </a>
+            </Link>
           </Logo>
           <Logo>
-            <a href="/">
+            <Link to="/">
               <img src={ModsenLogo} alt="Modsen" />
-            </a>
+            </Link>
           </Logo>
         </FooterContainer>
       </Container>

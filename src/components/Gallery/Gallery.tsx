@@ -1,9 +1,9 @@
-// Gallery.tsx
 import React from 'react'
 import { GalleryWrapper, TitleWrapper, GalleryGrid } from './Gallery.styles'
 import GalleryItem from '../GalleryItem/GalleryItem'
 import { Container } from '../../style/Container.styles'
 import art from '../../assets/img/image 1.png'
+import { Link } from 'react-router-dom'
 
 interface GalleryProps {
   title: string
@@ -22,11 +22,6 @@ const data = [
   { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' }
 ]
 
-interface GalleryProps {
-  title: string
-  subtitle: string
-}
-
 const Gallery: React.FC<GalleryProps> = ({ title, subtitle }) => {
   return (
     <Container>
@@ -37,13 +32,14 @@ const Gallery: React.FC<GalleryProps> = ({ title, subtitle }) => {
         </TitleWrapper>
         <GalleryGrid>
           {data.map((item, index) => (
-            <GalleryItem
-              key={index}
-              img={item.img}
-              title={item.title}
-              name={item.name}
-              status={item.status}
-            />
+            <Link to="/art-item" key={index}>
+              <GalleryItem
+                img={item.img}
+                title={item.title}
+                name={item.name}
+                status={item.status}
+              />
+            </Link>
           ))}
         </GalleryGrid>
       </GalleryWrapper>

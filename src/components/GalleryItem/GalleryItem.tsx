@@ -19,12 +19,14 @@ const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
   return (
     <GalleryItemContainer>
       <GalleryDetails>
-        <GalleryImg src={img} alt="Artwork" />
-        <TextDetails>
-          <h3>{title}</h3>
-          <span>{name}</span>
-          <span>{status}</span>
-        </TextDetails>
+        <>
+          <GalleryImg src={img} alt="Artwork" />
+          <TextDetails>
+            <h3>{title}</h3>
+            <span>{name}</span>
+            <span>{status}</span>
+          </TextDetails>
+        </>
         <FavoriteButton>
           <img src={favorite} alt="Favorite" />
         </FavoriteButton>

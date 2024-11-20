@@ -1,19 +1,21 @@
-import NavBar from '../NavBar/NavBar'
-import { Block } from '../../style/Pages.styles.ts'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import NavBar from '../NavBar/NavBar.tsx'
+import HomePage from '../../pages/HomePage.tsx'
+import FavoritePage from '../../pages/FavoritePage.tsx'
+import ArtItem from '../ArtItem/ArtItem.tsx'
 import Footer from '../Footer/Footer.tsx'
-import SpecialGallery from '../SpecialGallery/SpecialGallery.tsx'
-import Gallery from '../Gallery/Gallery.tsx'
-import SearchBar from '../SearchBar/SearchBar.tsx'
-const App = () => {
+
+const App: React.FC = () => {
   return (
-    <Block>
+    <Router>
       <NavBar />
-      <SearchBar />
-      <SpecialGallery />
-      <Gallery />
-      <Gallery />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/favorites" element={<FavoritePage />} />
+        <Route path="/art-item" element={<ArtItem />} />
+      </Routes>
       <Footer />
-    </Block>
+    </Router>
   )
 }
 

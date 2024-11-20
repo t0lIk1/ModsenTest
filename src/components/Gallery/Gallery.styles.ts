@@ -27,7 +27,15 @@ export const GalleryGrid = styled.div`
   text-align: left;
 
   a {
-    text-decoration: none;
-    color: inherit;
+    overflow: hidden;
+    border-radius: 8px;
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
   }
 `

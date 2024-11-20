@@ -1,4 +1,4 @@
-// SpecialGallery.tsx
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import art from '../../assets/img/image 1.png'
 import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
@@ -41,14 +41,14 @@ const SpecialGallery: React.FC = () => {
           </TitleWrapper>
           <GalleryGrid>
             {currentItems.map((item, index) => (
-              <a href="/" key={index}>
+              <Link to="art-item" key={index}>
                 <SpecialGalleryItem
                   img={item.img}
                   title={item.title}
                   name={item.name}
                   status={item.status}
                 />
-              </a>
+              </Link>
             ))}
           </GalleryGrid>
         </GalleryWrapper>

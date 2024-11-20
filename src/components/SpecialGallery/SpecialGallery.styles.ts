@@ -35,11 +35,15 @@ export const GalleryGrid = styled.div`
   justify-content: space-between;
 
   a {
-    cursor: pointer;
+    display: block;
+    border-radius: 8px;
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
 
     &:hover {
-      transform: scale(1.01);
-      transition: transform 0.3s ease-in-out;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
   }
 `
