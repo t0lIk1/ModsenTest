@@ -1,5 +1,4 @@
-// Pagination.tsx
-import React from 'react'
+import NextButton from '../../assets/Combined Shape.svg'
 
 interface PaginationProps {
   currentPage: number
@@ -7,6 +6,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
+// eslint-disable-next-line react/prop-types
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers: number[] = []
 
@@ -17,14 +17,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
   return (
     <div className="pagination">
-      {/* Previous button */}
-      <button
-        type="button"
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        P
-      </button>
       {/* Page number buttons */}
       {pageNumbers.map((number) => (
         <button
@@ -42,7 +34,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        N
+        <img src={NextButton} alt="next" />
       </button>
     </div>
   )

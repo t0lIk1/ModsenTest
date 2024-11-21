@@ -21,7 +21,7 @@ const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
     <GalleryItemContainer>
       <GalleryDetails>
         <GalleryInfo>
-          <GalleryImg src={img} alt="Artwork" />
+          <GalleryImg src={img} />
           <TextDetails>
             <h3>{title}</h3>
             <span>{name}</span>

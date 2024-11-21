@@ -43,8 +43,8 @@ export const useArtworksService = () => {
         const data = response.data
 
         const artistDisplayParts = data.artist_display.split('\n')
-        const artist_nationality =
-          artistDisplayParts.length > 1 ? artistDisplayParts[1].trim() : 'Unknown'
+        const nationality = artistDisplayParts.length > 1 ? artistDisplayParts[1].trim() : 'Unknown'
+
         const artwork: Artwork = {
           id: data.id,
           title: data.title,
@@ -57,7 +57,7 @@ export const useArtworksService = () => {
           credit_line: data.credit_line,
           repository: data.repository,
           place_of_origin: data.place_of_origin,
-          artist_nationality: artist_nationality
+          artist_nationality: nationality
         }
 
         return artwork
@@ -69,5 +69,26 @@ export const useArtworksService = () => {
     [request]
   )
 
-  return { getArtworks, getArtwork, isLoading, hasError }
+  const getSpecialArtworks = useCallback(async (): Promise<Artwork[]> => {
+    try {
+      const response = await request(`${API_URL}?limit=100&boost_rank=1`)
+      const data = response.data.map((item: any) => {
+        return {
+          id: item.id,
+          title: item.title,
+          artist_title: item.artist_title,
+          image_url: item.image_id
+            ? `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`
+            : undefined,
+          date_display: item.date_display
+        }
+      })
+      return data
+    } catch (error) {
+      console.error('Error fetching special artworks:', error)
+      throw error
+    }
+  }, [request])
+
+  return { getArtworks, getArtwork, getSpecialArtworks, isLoading, hasError }
 }

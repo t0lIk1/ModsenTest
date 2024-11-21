@@ -11,19 +11,19 @@ import favorite from '../../assets/Vector.svg'
 interface IGalleryProps {
   title: string
   name: string
-  status: string
+  date: string
   img: string // Тип string подходит для пути к изображению
 }
 
-const SpecialGalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
+const SpecialGalleryItem: React.FC<IGalleryProps> = ({ img, title, name, date }) => {
   return (
     <GalleryItemContainer>
       <GalleryImg src={img} alt="Artwork" />
       <GalleryDetails>
         <TextDetails>
-          <h3>{title}</h3>
-          <span>{name}</span>
-          <span>{status}</span>
+          <h3>{title || 'Unknow'}</h3>
+          <span>{name || 'Unknow'}</span>
+          <span>{date || 'Unknow'}</span>
         </TextDetails>
         <FavoriteButton>
           <img src={favorite} alt="Favorite" />
