@@ -51,9 +51,11 @@ export default tseslint.config(
     },
     rules: {
       // set of custom rules
-      'no-console': 'warn',
+      'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       'react/button-has-type': 'error',
       'react/react-in-jsx-scope': ['off'],
+      "@typescript-eslint/no-unused-vars": ["error"],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]
     }
   }

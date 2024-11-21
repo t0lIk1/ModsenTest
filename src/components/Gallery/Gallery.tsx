@@ -2,27 +2,23 @@ import React from 'react'
 import { GalleryWrapper, TitleWrapper, GalleryGrid } from './Gallery.styles'
 import GalleryItem from '../GalleryItem/GalleryItem'
 import { Container } from '../../style/Container.styles'
-import art from '../../assets/img/image 1.png'
 import { Link } from 'react-router-dom'
+import NoImg from '../../assets/img/Group 95.png'
 
 interface GalleryProps {
   title: string
   subtitle: string
+  artworks: Artwork[]
 }
 
-const data = [
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' },
-  { img: art, title: 'Charles V bust length...', name: 'Giovanni Britto', status: 'Public' }
-]
+interface Artwork {
+  id: number
+  title: string
+  artist_title: string
+  image_url?: string
+}
 
-const Gallery: React.FC<GalleryProps> = ({ title, subtitle }) => {
+const Gallery: React.FC<GalleryProps> = ({ title, subtitle, artworks }) => {
   return (
     <Container>
       <GalleryWrapper>
@@ -31,13 +27,13 @@ const Gallery: React.FC<GalleryProps> = ({ title, subtitle }) => {
           <h3>{title}</h3>
         </TitleWrapper>
         <GalleryGrid>
-          {data.map((item, index) => (
-            <Link to="/art-item" key={index}>
+          {artworks.map((item) => (
+            <Link to={`/art-item/${item.id}`} key={item.id}>
               <GalleryItem
-                img={item.img}
+                img={item.image_url || NoImg}
                 title={item.title}
-                name={item.name}
-                status={item.status}
+                name={item.artist_title}
+                status="Public"
               />
             </Link>
           ))}

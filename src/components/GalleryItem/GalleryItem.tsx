@@ -4,7 +4,8 @@ import {
   GalleryImg,
   GalleryItemContainer,
   FavoriteButton,
-  TextDetails
+  TextDetails,
+  GalleryInfo
 } from './GalleryItem.styles.ts'
 import favorite from '../../assets/Vector.svg'
 
@@ -19,14 +20,14 @@ const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, status }) => {
   return (
     <GalleryItemContainer>
       <GalleryDetails>
-        <>
+        <GalleryInfo>
           <GalleryImg src={img} alt="Artwork" />
           <TextDetails>
             <h3>{title}</h3>
             <span>{name}</span>
             <span>{status}</span>
           </TextDetails>
-        </>
+        </GalleryInfo>
         <FavoriteButton>
           <img src={favorite} alt="Favorite" />
         </FavoriteButton>

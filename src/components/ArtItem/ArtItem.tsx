@@ -1,44 +1,58 @@
+// src/components/ArtItem/ArtItem.tsx
 import React from 'react'
 import { ArtText, ArtImg, ArtTitle, ArtDetails, ArtBlock, ArtInfo } from './ArtItem.styles'
 import { Container } from '../../style/Container.styles'
 import { Block } from '../../style/Pages.styles'
 import { FavoriteButton } from '../GalleryItem/GalleryItem.styles'
 import favorite from '../../assets/Vector.svg'
-import image from '../../assets/img/image 2.png'
 
-const ArtItem: React.FC = () => {
+interface ArtItemProps {
+  artwork: {
+    id: number
+    title: string
+    artist_title: string
+    image_url?: string
+    date_display: string
+    dimensions: string
+    credit_line: string
+    repository: string
+    status: string
+  }
+}
+
+const ArtItem: React.FC<ArtItemProps> = ({ artwork }) => {
   return (
     <Block>
       <Container>
         <ArtBlock>
           <ArtImg>
-            <img src={image} alt="" />
+            <img src={artwork.image_url || ''} alt={artwork.title} />
             <FavoriteButton>
-              <img src={favorite} alt="" />
+              <img src={favorite} alt="Favorite" />
             </FavoriteButton>
           </ArtImg>
           <ArtInfo>
             <ArtTitle>
-              <h3>Charles V, bust length, holding a sword, facing right</h3>
-              <span>Giovanni Britto</span>
-              <span>1535–45</span>
+              <h3>{artwork.title}</h3>
+              <span>{artwork.artist_title}</span>
+              <span>{artwork.date_display}</span>
             </ArtTitle>
             <ArtDetails>
               <h3>Overview</h3>
               <ArtText>
                 <span>
-                  <strong>Artist nacionality:</strong> German
+                  <strong>Artist nationality:</strong> {artwork.artist_title.split(',')[1].trim()}
                 </span>
                 <span>
-                  <strong>Dimensions:</strong> Sheet: 19 3/8 × 13 11/16 in. (49.2 × 34.8 cm)
+                  <strong>Dimensions:</strong> {artwork.dimensions}
                 </span>
                 <span>
-                  <strong>Credit Line:</strong> Rogers Fund, 1917
+                  <strong>Credit Line:</strong> {artwork.credit_line}
                 </span>
                 <span>
-                  <strong>Repository:</strong> Metropolitan Museum of Art, New York, NY
+                  <strong>Repository:</strong> {artwork.repository}
                 </span>
-                <span>Public</span>
+                <span>{artwork.status}</span>
               </ArtText>
             </ArtDetails>
           </ArtInfo>

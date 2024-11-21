@@ -12,8 +12,7 @@ export const GalleryImg = styled.img`
 
 export const GalleryDetails = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 16px;
   align-items: center;
   border: 1px solid #f0f1f1;
@@ -23,15 +22,25 @@ export const GalleryDetails = styled.div`
   background: #fff;
 `
 
+export const GalleryInfo = styled.div`
+  display: flex;
+  gap: 16px;
+`
+
 export const TextDetails = styled.div`
   display: flex;
   flex-direction: column;
+
   h3 {
     font-weight: 500;
     font-size: 17px;
     line-height: 150%;
     letter-spacing: -0.03em;
     color: #393939;
+    max-width: 219px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   span {
