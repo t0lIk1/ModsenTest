@@ -30,6 +30,7 @@ export const ArtInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 40px;
 `
 export const ArtTitle = styled.div`
   display: flex;

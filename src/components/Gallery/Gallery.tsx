@@ -3,7 +3,7 @@ import { GalleryWrapper, TitleWrapper, GalleryGrid } from './Gallery.styles'
 import GalleryItem from '../GalleryItem/GalleryItem'
 import { Container } from '../../style/Container.styles'
 import { Link } from 'react-router-dom'
-import NoImg from '../../assets/img/Group 95.png'
+import NoImg from '../../assets/Group 95.svg'
 
 interface GalleryProps {
   title: string

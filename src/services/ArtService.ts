@@ -6,13 +6,19 @@ interface Artwork {
   title: string
   artist_title: string
   image_url?: string
+  date_display?: string
+  dimensions?: string
+  credit_line?: string
+  repository?: string
+  place_of_origin?: string
+  artist_nationality?: string
 }
 
 export const useArtworksService = () => {
   const API_URL = 'https://api.artic.edu/api/v1/artworks'
   const { request, isLoading, hasError } = useHttp()
 
-  const getArtworks = useCallback(async (): Promise<void> => {
+  const getArtworks = useCallback(async (): Promise<Artwork[]> => {
     try {
       const response = await request(`${API_URL}?limit=100`)
       const data = response.data.map((item: any) => ({
@@ -31,18 +37,29 @@ export const useArtworksService = () => {
   }, [request])
 
   const getArtwork = useCallback(
-    async (id: number): Promise<void> => {
+    async (id: number): Promise<Artwork> => {
       try {
         const response = await request(`${API_URL}/${id}`)
         const data = response.data
+
+        const artistDisplayParts = data.artist_display.split('\n')
+        const artist_nationality =
+          artistDisplayParts.length > 1 ? artistDisplayParts[1].trim() : 'Unknown'
         const artwork: Artwork = {
           id: data.id,
           title: data.title,
           artist_title: data.artist_title,
           image_url: data.image_id
             ? `https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`
-            : undefined
+            : undefined,
+          date_display: data.date_display,
+          dimensions: data.dimensions,
+          credit_line: data.credit_line,
+          repository: data.repository,
+          place_of_origin: data.place_of_origin,
+          artist_nationality: artist_nationality
         }
+
         return artwork
       } catch (error) {
         console.error('Error fetching artwork:', error)

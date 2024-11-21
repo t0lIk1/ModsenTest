@@ -30,7 +30,6 @@ const HomePage: React.FC = () => {
         setLoading(false)
       }
     }
-
     fetchData()
   }, [])
 
