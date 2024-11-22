@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FavoriteButton } from '../GalleryItem/GalleryItem.styles'
+import { FavoriteBut } from '../FavoriteButton/FavoriteButton.styles.ts'
 
 export const ArtBlock = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const ArtImg = styled.div`
     }
 }
 
-${FavoriteButton} {
+${FavoriteBut} {
     position: absolute;
     top: 15px; // Example positioning
     right: 15px; // Example positioning

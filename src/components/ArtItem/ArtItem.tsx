@@ -1,12 +1,11 @@
 import { ArtText, ArtImg, ArtTitle, ArtDetails, ArtBlock, ArtInfo } from './ArtItem.styles'
 import { Container } from '../../style/Container.styles'
 import { Block } from '../../style/Pages.styles'
-import { FavoriteButton } from '../GalleryItem/GalleryItem.styles'
-import favorite from '../../assets/Vector.svg'
 import NoImg from '../../assets/img/NoImg(big).png'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useArtworksService } from '../../services/ArtService.ts'
+import FavoriteButton from '../FavoriteButton/FavoriteButton.tsx'
 
 interface Artwork {
   id: number
@@ -56,9 +55,7 @@ const ArtItem: React.FC = () => {
         <ArtBlock>
           <ArtImg>
             <img src={artwork.image_url || NoImg} alt="" />
-            <FavoriteButton>
-              <img src={favorite} alt="Favorite" />
-            </FavoriteButton>
+            <FavoriteButton />
           </ArtImg>
           <ArtInfo>
             <ArtTitle>

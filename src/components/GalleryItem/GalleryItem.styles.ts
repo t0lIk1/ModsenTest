@@ -1,24 +1,45 @@
 import styled from 'styled-components'
+import { FavoriteBut } from '../FavoriteButton/FavoriteButton.styles.ts'
 
 export const GalleryItemContainer = styled.div`
-  max-height: 416px;
+  position: relative;
+  max-height: 130px;
+  max-width: 460px;
+  width: 100%;
   margin: 0 auto;
+  z-index: 1;
+
+  a {
+    display: block;
+    border-radius: 8px;
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  ${FavoriteBut} {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 13px;
+    transform: translateY(-50%);
+  }
 `
 
 export const GalleryImg = styled.img`
   width: 80px;
   height: 80px;
+  object-fit: cover;
 `
 
 export const GalleryDetails = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
   border: 1px solid #f0f1f1;
   padding: 16px;
-  width: 100%;
-  height: auto;
   background: #fff;
 `
 
@@ -57,22 +78,5 @@ export const TextDetails = styled.div`
     line-height: 171%;
     letter-spacing: -0.01em;
     color: #393939;
-  }
-`
-
-export const FavoriteButton = styled.button`
-  border-radius: 35px;
-  padding: 17px;
-  width: 59px;
-  height: 59px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f9f9f9;
-
-  &:hover {
-    background: rgba(251, 215, 178, 0.3);
-    transition: 0.3s ease-in-out;
   }
 `

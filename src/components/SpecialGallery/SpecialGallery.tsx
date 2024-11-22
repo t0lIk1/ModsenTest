@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
 import { Container } from '../../style/Container.styles'
 import Pagination from '../Pagination/Pagination'
@@ -20,18 +19,19 @@ interface Artwork {
   title: string
   artist_title: string
   image_url?: string
-  date_display?: string
+  date_display: string
 }
 
 const SpecialGallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState<Artwork[]>([])
   const { getSpecialArtworks, hasError, isLoading } = useArtworksService()
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const artworks = await getSpecialArtworks()
+        // eslint-disable-next-line
+        // @ts-ignore
         setData(artworks)
       } catch (error) {
         console.error(error)
@@ -62,14 +62,14 @@ const SpecialGallery: React.FC = () => {
           </TitleWrapper>
           <GalleryGrid>
             {currentItems.map((item) => (
-              <Link to={`/art-item/${item.id}`} key={item.id}>
-                <SpecialGalleryItem
-                  img={item.image_url || NoImg}
-                  title={item.title}
-                  name={item.artist_title}
-                  date={item.date_display}
-                />
-              </Link>
+              <SpecialGalleryItem
+                key={item.id}
+                img={item.image_url || NoImg}
+                title={item.title}
+                name={item.artist_title}
+                date={item.date_display}
+                to={`/art-item/${item.id}`}
+              />
             ))}
           </GalleryGrid>
         </GalleryWrapper>

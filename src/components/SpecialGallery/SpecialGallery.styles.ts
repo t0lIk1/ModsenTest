@@ -1,19 +1,15 @@
-// SpecialGallery.styles.ts
 import styled from 'styled-components'
 
-// Style for the section
 export const GallerySection = styled.section`
   padding: 20px;
   background-color: #f9f9f9;
 `
 
-// Wrapper for the entire gallery content
 export const GalleryWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-// Style for the title and subtitle
 export const TitleWrapper = styled.div`
   text-align: center;
   margin-bottom: 40px;
@@ -29,7 +25,6 @@ export const TitleWrapper = styled.div`
   }
 `
 
-// Style for the grid of gallery items
 export const GalleryGrid = styled.div`
   display: flex;
   justify-content: space-between;

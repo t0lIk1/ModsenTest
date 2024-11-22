@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+// import { FavoriteBut } from '../FavoriteButton/FavoriteButton.styles.ts'
 
 export const GalleryItemContainer = styled.div`
   max-height: 514px;
@@ -11,6 +12,7 @@ export const GalleryImg = styled.img`
   width: 100%;
   height: 444px;
   z-index: 1;
+  object-fit: cover;
 `
 
 export const GalleryDetails = styled.div`
@@ -34,12 +36,17 @@ export const GalleryDetails = styled.div`
 export const TextDetails = styled.div`
   display: flex;
   flex-direction: column;
+
   h3 {
     font-weight: 500;
     font-size: 17px;
     line-height: 150%;
     letter-spacing: -0.03em;
     color: #393939;
+    max-width: 219px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   span {
@@ -59,19 +66,19 @@ export const TextDetails = styled.div`
   }
 `
 
-export const FavoriteButton = styled.button`
-  border-radius: 35px;
-  padding: 17px;
-  width: 59px;
-  height: 59px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f9f9f9;
-
-  &:hover {
-    background: rgba(251, 215, 178, 0.3);
-    transition: 0.3s ease-in-out;
-  }
-`
+// export const FavoriteButton = styled.button`
+//   border-radius: 35px;
+//   padding: 17px;
+//   width: 59px;
+//   height: 59px;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background: #f9f9f9;
+//
+//   &:hover {
+//     background: rgba(251, 215, 178, 0.3);
+//     transition: 0.3s ease-in-out;
+//   }
+// `

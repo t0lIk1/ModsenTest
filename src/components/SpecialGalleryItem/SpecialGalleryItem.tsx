@@ -3,32 +3,33 @@ import {
   GalleryDetails,
   GalleryImg,
   GalleryItemContainer,
-  FavoriteButton,
   TextDetails
 } from './SpecialGalleryItem.styles.ts'
-import favorite from '../../assets/Vector.svg'
+import FavoriteButton from '../FavoriteButton/FavoriteButton.tsx'
+import { Link } from 'react-router-dom'
 
 interface IGalleryProps {
   title: string
   name: string
   date: string
-  img: string // Тип string подходит для пути к изображению
+  img: string
+  to: string
 }
 
-const SpecialGalleryItem: React.FC<IGalleryProps> = ({ img, title, name, date }) => {
+const SpecialGalleryItem: React.FC<IGalleryProps> = ({ to, img, title, name, date }) => {
   return (
     <GalleryItemContainer>
-      <GalleryImg src={img} alt="Artwork" />
-      <GalleryDetails>
-        <TextDetails>
-          <h3>{title || 'Unknow'}</h3>
-          <span>{name || 'Unknow'}</span>
-          <span>{date || 'Unknow'}</span>
-        </TextDetails>
-        <FavoriteButton>
-          <img src={favorite} alt="Favorite" />
-        </FavoriteButton>
-      </GalleryDetails>
+      <Link to={to}>
+        <GalleryImg src={img} alt="Artwork" />
+        <GalleryDetails>
+          <TextDetails>
+            <h3>{title || 'Unknow'}</h3>
+            <span>{name || 'Unknow'}</span>
+            <span>{date || 'Unknow'}</span>
+          </TextDetails>
+        </GalleryDetails>
+      </Link>
+      <FavoriteButton />
     </GalleryItemContainer>
   )
 }

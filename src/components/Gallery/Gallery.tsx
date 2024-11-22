@@ -2,7 +2,6 @@ import React from 'react'
 import { GalleryWrapper, TitleWrapper, GalleryGrid } from './Gallery.styles'
 import GalleryItem from '../GalleryItem/GalleryItem'
 import { Container } from '../../style/Container.styles'
-import { Link } from 'react-router-dom'
 import NoImg from '../../assets/Group 95.svg'
 
 interface GalleryProps {
@@ -28,14 +27,15 @@ const Gallery: React.FC<GalleryProps> = ({ title, subtitle, artworks }) => {
         </TitleWrapper>
         <GalleryGrid>
           {artworks.map((item) => (
-            <Link to={`/art-item/${item.id}`} key={item.id}>
-              <GalleryItem
-                img={item.image_url || NoImg}
-                title={item.title}
-                name={item.artist_title}
-                status="Public"
-              />
-            </Link>
+            <GalleryItem
+              key={item.id}
+              itemId={item.id.toString()}
+              img={item.image_url || NoImg}
+              title={item.title}
+              name={item.artist_title}
+              status="Public"
+              to={`/art-item/${item.id}`}
+            />
           ))}
         </GalleryGrid>
       </GalleryWrapper>
