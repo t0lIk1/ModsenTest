@@ -9,7 +9,6 @@ interface Artwork {
   date_display?: string
   dimensions?: string
   credit_line?: string
-  repository?: string
   place_of_origin?: string
   artist_nationality?: string
 }
@@ -55,7 +54,6 @@ export const useArtworksService = () => {
           date_display: data.date_display,
           dimensions: data.dimensions,
           credit_line: data.credit_line,
-          repository: data.repository,
           place_of_origin: data.place_of_origin,
           artist_nationality: nationality
         }

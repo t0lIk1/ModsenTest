@@ -8,8 +8,4 @@ export const Block = styled.div`
   gap: 40px;
   background-color: #f9f9f9;
   min-height: 100vh;
-
-  > :not(:last-child) {
-    flex: 1;
-  }
 `

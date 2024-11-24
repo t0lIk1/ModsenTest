@@ -29,7 +29,7 @@ const Gallery: React.FC<GalleryProps> = ({ title, subtitle, artworks }) => {
           {artworks.map((item) => (
             <GalleryItem
               key={item.id}
-              itemId={item.id.toString()}
+              itemId={item.id}
               img={item.image_url || NoImg}
               title={item.title}
               name={item.artist_title}

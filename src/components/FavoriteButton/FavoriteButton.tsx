@@ -24,8 +24,8 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     e.stopPropagation()
     const artwork = { id: itemId, title, artist_title, image_url }
     toggleFavorite(artwork)
+    console.log(typeof itemId)
   }
-
   return (
     <FavoriteBut onClick={handleToggleFavorite}>
       <img

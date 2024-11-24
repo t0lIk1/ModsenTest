@@ -1,11 +1,12 @@
+import React, { useContext, useEffect, useState } from 'react'
 import { ArtText, ArtImg, ArtTitle, ArtDetails, ArtBlock, ArtInfo } from './ArtItem.styles'
 import { Container } from '../../style/Container.styles'
 import { Block } from '../../style/Pages.styles'
 import NoImg from '../../assets/img/NoImg(big).png'
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { useArtworksService } from '../../services/ArtService.ts'
 import FavoriteButton from '../FavoriteButton/FavoriteButton.tsx'
+import { FavoritesContext } from '../FavoriteButton/FavoritesContext.tsx'
 
 interface Artwork {
   id: number
@@ -22,13 +23,14 @@ interface Artwork {
 
 const ArtItem: React.FC = () => {
   const { getArtwork, hasError, isLoading } = useArtworksService()
-  const { id } = useParams<{ id: string }>()
+  const { id: ParamsId } = useParams<{ id: string }>()
   const [artwork, setArtwork] = useState<Artwork | null>(null)
+  const { isFavorite } = useContext(FavoritesContext)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getArtwork(Number(id))
+        const data = await getArtwork(Number(ParamsId))
         setArtwork(data)
       } catch (error) {
         console.error(error)
@@ -37,7 +39,7 @@ const ArtItem: React.FC = () => {
     }
 
     fetchData()
-  }, [id, getArtwork])
+  }, [ParamsId, getArtwork])
 
   if (isLoading) {
     return <h1>Loading...</h1>
@@ -49,34 +51,52 @@ const ArtItem: React.FC = () => {
     return <h1>Artwork not found</h1>
   }
 
+  const {
+    id,
+    image_url,
+    artist_title,
+    title,
+    date_display,
+    artist_nationality,
+    credit_line,
+    dimensions,
+    place_of_origin
+  } = artwork
+
   return (
     <Block>
       <Container>
         <ArtBlock>
           <ArtImg>
-            <img src={artwork.image_url || NoImg} alt="" />
-            <FavoriteButton />
+            <img src={image_url || NoImg} alt="" />
+            <FavoriteButton
+              itemId={id}
+              title={title}
+              artist_title={artist_title}
+              image_url={image_url || NoImg}
+              isFavorite={isFavorite(id)}
+            />
           </ArtImg>
           <ArtInfo>
             <ArtTitle>
-              <h3>{artwork.title}</h3>
-              <span>{artwork.artist_title || 'Unknown'}</span>
-              <span>{artwork.date_display || 'Unknown'}</span>
+              <h3>{title}</h3>
+              <span>{artist_title || 'Unknown'}</span>
+              <span>{date_display || 'Unknown'}</span>
             </ArtTitle>
             <ArtDetails>
               <h3>Overview</h3>
               <ArtText>
                 <span>
-                  <strong>Artist nationality:</strong> {artwork.artist_nationality || 'Unknown'}
+                  <strong>Artist nationality:</strong> {artist_nationality || 'Unknown'}
                 </span>
                 <span>
-                  <strong>Dimensions:</strong> {artwork.dimensions || 'Unknown'}
+                  <strong>Dimensions:</strong> {dimensions || 'Unknown'}
                 </span>
                 <span>
-                  <strong>Credit Line:</strong> {artwork.credit_line || 'Unknown'}
+                  <strong>Credit Line:</strong> {credit_line || 'Unknown'}
                 </span>
                 <span>
-                  <strong>Place of origin:</strong> {artwork.place_of_origin || 'Unknown'}
+                  <strong>Place of origin:</strong> {place_of_origin || 'Unknown'}
                 </span>
               </ArtText>
             </ArtDetails>
