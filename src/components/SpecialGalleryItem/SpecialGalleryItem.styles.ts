@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FavoriteBut } from '../FavoriteButton/FavoriteButton.styles.ts'
 // import { FavoriteBut } from '../FavoriteButton/FavoriteButton.styles.ts'
 
 export const GalleryItemContainer = styled.div`
@@ -6,6 +7,12 @@ export const GalleryItemContainer = styled.div`
   max-width: 387px;
   position: relative;
   margin: 0 auto;
+
+  ${FavoriteBut} {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 `
 
 export const GalleryImg = styled.img`
@@ -16,14 +23,16 @@ export const GalleryImg = styled.img`
 `
 
 export const GalleryDetails = styled.div`
-  position: absolute;
-  bottom: 15px;
+  position: relative;
+`
+
+export const TextDetails = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  position: absolute;
   justify-content: space-between;
-  align-items: center;
   border: 1px solid #f0f1f1;
-  padding: 32px 24px;
+  padding: 21px 24px;
   width: 334px;
   height: 132px;
   background: #fff;
@@ -31,11 +40,6 @@ export const GalleryDetails = styled.div`
   left: 50%;
   top: 100%;
   transform: translate(-50%, -50%);
-`
-
-export const TextDetails = styled.div`
-  display: flex;
-  flex-direction: column;
 
   h3 {
     font-weight: 500;
@@ -43,7 +47,7 @@ export const TextDetails = styled.div`
     line-height: 150%;
     letter-spacing: -0.03em;
     color: #393939;
-    max-width: 219px;
+    max-width: 290px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -65,20 +69,3 @@ export const TextDetails = styled.div`
     color: #393939;
   }
 `
-
-// export const FavoriteButton = styled.button`
-//   border-radius: 35px;
-//   padding: 17px;
-//   width: 59px;
-//   height: 59px;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background: #f9f9f9;
-//
-//   &:hover {
-//     background: rgba(251, 215, 178, 0.3);
-//     transition: 0.3s ease-in-out;
-//   }
-// `

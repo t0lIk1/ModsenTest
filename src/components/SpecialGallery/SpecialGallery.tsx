@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
+import { useArtworksService } from '../../services/ArtService.ts'
 import { Container } from '../../style/Container.styles'
-import Pagination from '../Pagination/Pagination'
 import {
   GallerySection,
   GalleryWrapper,
@@ -9,7 +8,8 @@ import {
   GalleryGrid,
   PaginationWrapper
 } from './SpecialGallery.styles'
-import { useArtworksService } from '../../services/ArtService.ts'
+import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
+import Pagination from '../Pagination/Pagination'
 import NoImg from '../../assets/img/NoImg(big).png'
 
 const itemsPerPage = 3
@@ -25,7 +25,7 @@ interface Artwork {
 const SpecialGallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState<Artwork[]>([])
-  const { getSpecialArtworks, hasError, isLoading } = useArtworksService()
+  const { getSpecialArtworks } = useArtworksService()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,10 +47,6 @@ const SpecialGallery: React.FC = () => {
     if (page < 1 || page > totalPages) return
     setCurrentPage(page)
   }
-
-  if (isLoading) return <div>Loading...</div>
-  if (hasError) return <div>{hasError}</div>
-
   return (
     <GallerySection>
       <Container>

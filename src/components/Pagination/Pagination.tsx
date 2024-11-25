@@ -17,7 +17,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
   return (
     <div className="pagination">
-      {/* Page number buttons */}
       {pageNumbers.map((number) => (
         <button
           type="button"

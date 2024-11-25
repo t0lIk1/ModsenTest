@@ -4,6 +4,7 @@ import SpecialGallery from '../components/SpecialGallery/SpecialGallery.tsx'
 import Gallery from '../components/Gallery/Gallery.tsx'
 import { Block } from '../style/Pages.styles.ts'
 import { useArtworksService } from '../services/ArtService.ts'
+import Loader from '../components/Loader/Loader.tsx'
 
 interface Artwork {
   id: number
@@ -12,38 +13,51 @@ interface Artwork {
   image_url?: string
 }
 
-const HomePage: React.FC = () => {
+const useFetchArtworks = () => {
   const { isLoading, hasError, getArtworks } = useArtworksService()
   const [artworks, setArtworks] = useState<Artwork[]>([])
-  const [loading, setLoading] = useState<boolean>(isLoading)
-  const [error, setError] = useState<string | null>(hasError)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getArtworks()
         setArtworks(data)
-        // eslint-disable-next-line
-      } catch (error) {
-        setError('Failed to fetch artworks')
-      } finally {
-        setLoading(false)
+      } catch (e) {
+        console.error(e)
       }
     }
     fetchData()
-  }, [])
+  }, [getArtworks])
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>{error}</div>
+  return { isLoading, hasError, artworks }
+}
+
+const HomePage: React.FC = () => {
+  const { isLoading, hasError, artworks } = useFetchArtworks()
+
+  if (isLoading) return <Loader />
+  if (hasError) return <div>Error loading artworks</div>
+
+  return <View artworks={artworks} />
+}
+
+interface ViewProps {
+  artworks: Artwork[]
+}
+
+const View: React.FC<ViewProps> = ({ artworks }) => {
+  const [isSearching, setIsSearching] = useState<boolean>(false)
 
   return (
-    <>
-      <Block>
-        <SearchBar />
-        <SpecialGallery />
-        <Gallery title="Our special gallery" subtitle="Topics for you" artworks={artworks} />
-      </Block>
-    </>
+    <Block>
+      <SearchBar setIsSearching={setIsSearching} />
+      {!isSearching && (
+        <>
+          <SpecialGallery />
+          <Gallery title="Our special gallery" subtitle="Topics for you" artworks={artworks} />
+        </>
+      )}
+    </Block>
   )
 }
 

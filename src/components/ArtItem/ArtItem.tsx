@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useArtworksService } from '../../services/ArtService.ts'
 import FavoriteButton from '../FavoriteButton/FavoriteButton.tsx'
 import { FavoritesContext } from '../FavoriteButton/FavoritesContext.tsx'
+import Loader from '../Loader/Loader.tsx'
 
 interface Artwork {
   id: number
@@ -21,7 +22,7 @@ interface Artwork {
   artist_nationality?: string
 }
 
-const ArtItem: React.FC = () => {
+const useFetchArtwork = () => {
   const { getArtwork, hasError, isLoading } = useArtworksService()
   const { id: ParamsId } = useParams<{ id: string }>()
   const [artwork, setArtwork] = useState<Artwork | null>(null)
@@ -41,8 +42,14 @@ const ArtItem: React.FC = () => {
     fetchData()
   }, [ParamsId, getArtwork])
 
+  return { hasError, isLoading, artwork, isFavorite }
+}
+
+const ArtItem: React.FC = () => {
+  const { hasError, isLoading, artwork, isFavorite } = useFetchArtwork()
+
   if (isLoading) {
-    return <h1>Loading...</h1>
+    return <Loader />
   }
   if (hasError) {
     return <h1>{hasError}</h1>
@@ -51,6 +58,15 @@ const ArtItem: React.FC = () => {
     return <h1>Artwork not found</h1>
   }
 
+  return <View artwork={artwork} isFavorite={isFavorite} />
+}
+
+interface ViewProps {
+  artwork: Artwork
+  isFavorite: (id: number) => boolean
+}
+
+const View: React.FC<ViewProps> = ({ artwork, isFavorite }) => {
   const {
     id,
     image_url,

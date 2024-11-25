@@ -14,6 +14,7 @@ interface Artwork {
 }
 
 export const useArtworksService = () => {
+  // Art Institute of Chicago API
   const API_URL = 'https://api.artic.edu/api/v1/artworks'
   const { request, isLoading, hasError } = useHttp()
 
@@ -71,6 +72,8 @@ export const useArtworksService = () => {
     try {
       const response = await request(`${API_URL}?limit=100&boost_rank=1`)
       const data = response.data.map((item: any) => {
+        console.log(item.image_id)
+
         return {
           id: item.id,
           title: item.title,
@@ -81,6 +84,7 @@ export const useArtworksService = () => {
           date_display: item.date_display
         }
       })
+
       return data
     } catch (error) {
       console.error('Error fetching special artworks:', error)
@@ -88,5 +92,36 @@ export const useArtworksService = () => {
     }
   }, [request])
 
-  return { getArtworks, getArtwork, getSpecialArtworks, isLoading, hasError }
+  const searchArtworks = useCallback(
+    async (query: string): Promise<Artwork[]> => {
+      try {
+        const response = await request(`${API_URL}/search?q=${query}`)
+        const data = response.data
+
+        const artworkDetailsPromises = data.map(async (item: any) => {
+          const detailsResponse = await request(`${API_URL}/${item.id}`)
+          const details = detailsResponse.data
+
+          return {
+            id: details.id,
+            title: details.title,
+            artist_title: details.artist_title,
+            image_url: details.image_id
+              ? `https://www.artic.edu/iiif/2/${details.image_id}/full/843,/0/default.jpg`
+              : item.thumbnail?.lqip || undefined, // Используем lqip для Data URL, если image_id недоступен
+            date_display: details.date_display
+          }
+        })
+
+        const artworks = await Promise.all(artworkDetailsPromises)
+        return artworks
+      } catch (e) {
+        console.error('Error fetching artworks:', e)
+        throw e
+      }
+    },
+    [request]
+  )
+
+  return { getArtworks, getArtwork, getSpecialArtworks, searchArtworks, isLoading, hasError }
 }
