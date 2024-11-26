@@ -22,7 +22,6 @@ const useFetchArtworks = () => {
     const fetchData = async () => {
       try {
         const data = await getArtworks()
-        console.log(data)
 
         setArtworks(data)
       } catch (e) {
