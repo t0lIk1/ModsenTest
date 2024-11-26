@@ -21,7 +21,6 @@ interface IGalleryProps {
 
 const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, dateDisplay, itemId, to }) => {
   const { isFavorite } = useContext(FavoritesContext)
-  console.log(dateDisplay)
   return (
     <GalleryItemContainer>
       <Link to={to}>
@@ -31,7 +30,7 @@ const GalleryItem: React.FC<IGalleryProps> = ({ img, title, name, dateDisplay, i
             <TextDetails>
               <h3>{title || 'Untitled'}</h3>
               <span>{name || 'Unknown Artist'}</span>
-              <span>{dateDisplay || 'Unknown'}</span>
+              <span>{dateDisplay || ''}</span>
             </TextDetails>
           </GalleryInfo>
         </GalleryDetails>
