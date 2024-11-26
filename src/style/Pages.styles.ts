@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Block = styled.div`
-  height: 100vh;
   font-family: 'Lexend Deca', sans-serif;
   display: flex;
   flex-direction: column;
