@@ -78,7 +78,6 @@ const View: React.FC<ViewProps> = ({ artwork, isFavorite }) => {
     dimensions,
     place_of_origin
   } = artwork
-  console.log(isFavorite(id))
   return (
     <Block>
       <Container>
