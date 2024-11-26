@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useArtworksService } from '../../services/ArtService.ts'
-import { Container } from '../../style/Container.styles.ts'
+import { Container } from '../../style/Container.styles.js'
 import {
   SearchBarContainer,
   SearchBarInputWrapper,
@@ -23,7 +23,7 @@ const schema = z.object({
   query: z.string().min(1, 'Query is required')
 })
 
-const useSearchArtworks = (setIsSearching) => {
+const useSearchArtworks = (setIsSearching: (isSearching: boolean) => void) => {
   const [results, setResults] = useState([])
   const { searchArtworks } = useArtworksService()
   const { register, handleSubmit, watch, setValue } = useForm({
@@ -55,7 +55,7 @@ const useSearchArtworks = (setIsSearching) => {
     }
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: { query: string }) => {
     setValue('query', data.query)
     handleSearch()
   }

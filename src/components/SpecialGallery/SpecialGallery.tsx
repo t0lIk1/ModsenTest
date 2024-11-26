@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useArtworksService } from '../../services/ArtService.ts'
-import { Container } from '../../style/Container.styles'
+import { Container } from '../../style/Container.styles.ts'
 import {
+  GalleryGrid,
   GallerySection,
   GalleryWrapper,
-  TitleWrapper,
-  GalleryGrid,
-  PaginationWrapper
+  PaginationWrapper,
+  TitleWrapper
 } from './SpecialGallery.styles'
 import SpecialGalleryItem from '../SpecialGalleryItem/SpecialGalleryItem'
 import Pagination from '../Pagination/Pagination'
-import NoImg from '../../assets/img/NoImg(big).png'
-
-const itemsPerPage = 3
 
 interface Artwork {
   id: number
   title: string
   artist_title: string
-  image_url?: string
+  image_url: string
   date_display: string
 }
+
+const itemsPerPage = 3
 
 const SpecialGallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -59,8 +58,8 @@ const SpecialGallery: React.FC = () => {
             {currentItems.map((item) => (
               <SpecialGalleryItem
                 key={item.id}
-                itemId={item.id}
-                img={item.image_url || NoImg}
+                itemId={item.id} // Преобразуем id в строку
+                img={item.image_url || NoImg} // Используем значение по умолчанию для картинки
                 title={item.title}
                 name={item.artist_title}
                 date={item.date_display}

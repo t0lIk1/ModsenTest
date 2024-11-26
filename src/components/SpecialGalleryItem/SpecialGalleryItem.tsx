@@ -14,7 +14,7 @@ interface IGalleryProps {
   name: string
   date: string
   img: string
-  itemId: string
+  itemId: number
   to: string
 }
 
@@ -22,7 +22,7 @@ const SpecialGalleryItem: React.FC<IGalleryProps> = ({ img, title, name, date, i
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const { isFavorite } = useContext(FavoritesContext)
-
+  console.log(isFavorite(itemId), typeof itemId)
   return (
     <GalleryItemContainer>
       <Link to={to}>

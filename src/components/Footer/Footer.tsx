@@ -1,4 +1,4 @@
-import { Container } from '../../style/Container.styles.ts'
+import { Container } from '../../style/Container.styles.js'
 import { FooterContainer, Logo, FooterWrapper } from './Footer.styles.ts'
 import MuseumLogo from '../../assets/museum-logo(black).svg'
 import ModsenLogo from '../../assets/logo modsen-02 2.svg'

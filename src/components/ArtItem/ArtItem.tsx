@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { ArtText, ArtImg, ArtTitle, ArtDetails, ArtBlock, ArtInfo } from './ArtItem.styles'
+import { ArtBlock, ArtDetails, ArtImg, ArtInfo, ArtText, ArtTitle } from './ArtItem.styles'
 import { Container } from '../../style/Container.styles'
 import { Block } from '../../style/Pages.styles'
 import NoImg from '../../assets/img/NoImg(big).png'
@@ -78,7 +78,7 @@ const View: React.FC<ViewProps> = ({ artwork, isFavorite }) => {
     dimensions,
     place_of_origin
   } = artwork
-
+  console.log(isFavorite(id))
   return (
     <Block>
       <Container>

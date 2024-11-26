@@ -11,6 +11,7 @@ interface Artwork {
   credit_line?: string
   place_of_origin?: string
   artist_nationality?: string
+  date_end?: number
 }
 
 export const useArtworksService = () => {
@@ -18,23 +19,27 @@ export const useArtworksService = () => {
   const API_URL = 'https://api.artic.edu/api/v1/artworks'
   const { request, isLoading, hasError } = useHttp()
 
-  const getArtworks = useCallback(async (): Promise<Artwork[]> => {
-    try {
-      const response = await request(`${API_URL}?limit=100`)
-      const data = response.data.map((item: any) => ({
-        id: item.id,
-        title: item.title,
-        artist_title: item.artist_title,
-        image_url: item.image_id
-          ? `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`
-          : undefined
-      }))
-      return data
-    } catch (error) {
-      console.error('Error fetching artworks:', error)
-      throw error
-    }
-  }, [request])
+  const getArtworks = useCallback(
+    async (limit = 9): Promise<Artwork[]> => {
+      try {
+        const response = await request(`${API_URL}?limit=${limit}`)
+        const data = response.data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          artist_title: item.artist_title,
+          image_url: item.image_id
+            ? `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`
+            : undefined,
+          date_display: item.date_display
+        }))
+        return data
+      } catch (error) {
+        console.error('Error fetching artworks:', error)
+        throw error
+      }
+    },
+    [request]
+  )
 
   const getArtwork = useCallback(
     async (id: number): Promise<Artwork> => {
@@ -72,8 +77,6 @@ export const useArtworksService = () => {
     try {
       const response = await request(`${API_URL}?limit=100&boost_rank=1`)
       const data = response.data.map((item: any) => {
-        console.log(item.image_id)
-
         return {
           id: item.id,
           title: item.title,
@@ -95,25 +98,21 @@ export const useArtworksService = () => {
   const searchArtworks = useCallback(
     async (query: string): Promise<Artwork[]> => {
       try {
-        const response = await request(`${API_URL}/search?q=${query}`)
+        const response = await request(
+          `${API_URL}/search?q=${query}&fields=date_display,id,title,image_id,artist_title,lqip`
+        )
         const data = response.data
 
-        const artworkDetailsPromises = data.map(async (item: any) => {
-          const detailsResponse = await request(`${API_URL}/${item.id}`)
-          const details = detailsResponse.data
+        const artworks = data.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          artist_title: item.artist_title,
+          image_url: item.image_id
+            ? `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`
+            : item.thumbnail?.lqip || undefined, // Используем lqip для Data URL, если image_id недоступен
+          date_display: item.date_display
+        }))
 
-          return {
-            id: details.id,
-            title: details.title,
-            artist_title: details.artist_title,
-            image_url: details.image_id
-              ? `https://www.artic.edu/iiif/2/${details.image_id}/full/843,/0/default.jpg`
-              : item.thumbnail?.lqip || undefined, // Используем lqip для Data URL, если image_id недоступен
-            date_display: details.date_display
-          }
-        })
-
-        const artworks = await Promise.all(artworkDetailsPromises)
         return artworks
       } catch (e) {
         console.error('Error fetching artworks:', e)

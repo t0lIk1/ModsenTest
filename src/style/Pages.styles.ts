@@ -9,3 +9,15 @@ export const Block = styled.div`
   background-color: #f9f9f9;
   min-height: 100vh;
 `
+
+export const SortWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+`

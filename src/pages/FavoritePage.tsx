@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Block } from '../style/Pages.styles.ts'
+import { Block } from '../style/Pages.styles.js'
 import Title from '../components/Title/Title.tsx'
 import { FavoritesContext } from '../components/FavoriteButton/FavoritesContext'
 import Gallery from '../components/Gallery/Gallery'
@@ -18,7 +18,9 @@ const FavoritePage: React.FC = () => {
   return (
     <Block>
       <Title mainText="Here Are Your" subText="Favorites" icon={FavoriteIcon} />
-      <Gallery title="Favorites" subtitle="Your favorite artworks" artworks={favoriteArtworks} />
+      {favoriteArtworks.length > 0 ? (
+        <Gallery title="Favorites" subtitle="Your favorite artworks" artworks={favoriteArtworks} />
+      ) : null}
     </Block>
   )
 }

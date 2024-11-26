@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface Favorite {
   id: number
   title: string
+  date: string
   artist_title: string
   image_url: string
 }
@@ -23,7 +24,7 @@ const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites]) // Убедитесь, что массив зависимостей включает только `favorites`
+  }, [favorites])
 
   const toggleFavorite = (item: Favorite) => {
     setFavorites((prevFavorites) => {
