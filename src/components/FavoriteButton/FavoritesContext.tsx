@@ -1,18 +1,5 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react'
-
-interface Favorite {
-  id: number
-  title: string
-  date: string
-  artist_title: string
-  image_url: string
-}
-
-interface FavoritesContextType {
-  favorites: Favorite[]
-  toggleFavorite: (item: Favorite) => void
-  isFavorite: (itemId: number) => boolean
-}
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { Favorite, FavoritesContextType } from '@/types/type.ts'
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
 

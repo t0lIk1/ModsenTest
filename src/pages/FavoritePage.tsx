@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Block } from '../style/Pages.styles.js'
-import Title from '../components/Title/Title.tsx'
-import { FavoritesContext } from '../components/FavoriteButton/FavoritesContext'
-import Gallery from '../components/Gallery/Gallery'
-import FavoriteIcon from '../assets/Favorite(orange).svg'
+import { useContext, useEffect, useState } from 'react'
+import { Block } from '@/style/Pages.styles.ts'
+import Title from '@/components/Title/index.tsx'
+import { FavoritesContext } from '@/components/FavoriteButton/FavoritesContext.tsx'
+import Gallery from '@/components/Gallery/index.tsx'
+import FavoriteIcon from '@/assets/Favorite(orange).svg'
 
 const FavoritePage: React.FC = () => {
-  // eslint-disable-next-line
-  // @ts-ignore
   const { favorites } = useContext(FavoritesContext)
   const [favoriteArtworks, setFavoriteArtworks] = useState(favorites)
 
