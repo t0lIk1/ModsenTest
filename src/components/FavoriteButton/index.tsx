@@ -10,13 +10,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   artist_title,
   image_url
 }) => {
-  const context = useContext(FavoritesContext)
-
-  if (!context) {
-    throw new Error('FavoriteButton must be used within a FavoritesProvider')
-  }
-
-  const { toggleFavorite, isFavorite } = context
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext)
 
   const handleToggleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()

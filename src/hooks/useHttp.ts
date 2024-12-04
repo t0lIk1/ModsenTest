@@ -1,11 +1,5 @@
-import { useState, useCallback } from 'react'
-
-interface HttpHook {
-  isLoading: boolean
-  hasError: string | null
-  request: (url: string, method?: string, body?: BodyInit | null) => Promise<any>
-  clearError: () => void
-}
+import { useCallback, useState } from 'react'
+import { HttpHook } from '@/types/type.ts'
 
 export const useHttp = (): HttpHook => {
   const [isLoading, setLoading] = useState<boolean>(true)

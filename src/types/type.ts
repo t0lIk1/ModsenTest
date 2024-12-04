@@ -24,8 +24,8 @@ export interface PaginationProps {
 }
 
 export interface SortButtonProps {
-  sortType: 'alphabetical' | 'date_display'
-  setSortType: React.Dispatch<React.SetStateAction<'alphabetical' | 'date_display'>>
+  sortType: 'alphabetical' | 'date_display' | 'off'
+  setSortType: React.Dispatch<React.SetStateAction<'alphabetical' | 'date_display' | 'off'>>
 }
 
 export interface Artwork {
@@ -34,6 +34,21 @@ export interface Artwork {
   artist_title?: string
   image_url?: string
   date_display?: string
+}
+
+export interface ArtworkData extends Artwork {
+  image_id?: string
+}
+
+export interface ArtworkDetails extends Artwork {
+  dimensions?: string
+  credit_line?: string
+  place_of_origin?: string
+  artist_nationality?: string
+}
+
+export interface ArtworkDetailsData extends ArtworkDetails, ArtworkData {
+  artist_display: string
 }
 
 export interface TitleProps {
@@ -46,37 +61,31 @@ export interface IGalleryProps extends Artwork {
   to: string
 }
 
-export interface ArtworkDetails {
-  id: number
+export interface FavoriteButtonProps {
+  itemId: number
   title?: string
   artist_title?: string
   image_url?: string
-  date_display?: string
-  dimensions?: string
-  credit_line?: string
-  repository?: string
-  place_of_origin?: string
-  artist_nationality?: string
-}
-
-export interface FavoriteButtonProps {
-  itemId: number
-  title: string
-  artist_title: string
-  image_url: string
   isFavorite: boolean
 }
 
 export interface Favorite {
-  id: number
-  title: string
-  date: string
-  artist_title: string
-  image_url: string
+  id?: number
+  title?: string
+  date?: string
+  artist_title?: string
+  image_url?: string
 }
 
 export interface FavoritesContextType {
   favorites: Favorite[]
   toggleFavorite: (item: Favorite) => void
   isFavorite: (itemId: number) => boolean
+}
+
+export interface HttpHook {
+  isLoading: boolean
+  hasError: string | null
+  request: (url: string, method?: string, body?: BodyInit | null) => Promise<any>
+  clearError: () => void
 }

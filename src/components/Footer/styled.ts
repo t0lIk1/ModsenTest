@@ -17,6 +17,6 @@ export const Logo = styled.div`
   }
 `
 
-export const FooterWrapper = styled.div`
+export const FooterWrapper = styled.footer`
   background-color: #ffff;
 `

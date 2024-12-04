@@ -4,37 +4,23 @@ import { ArtBlock, ArtDetails, ArtImg, ArtInfo, ArtText, ArtTitle } from './styl
 import { Container } from '@/style/Container.styles.ts'
 import { Block } from '@/style/Pages.styles.ts'
 import NoImg from '@/assets/img/NoImg(big).png'
-import { useArtworksService } from '@/services/ArtService.ts'
 import FavoriteButton from '@/components/FavoriteButton/index.tsx'
 import { FavoritesContext } from '@/components/FavoriteButton/FavoritesContext.tsx'
 import Loader from '@/components/Loader/index.tsx'
+import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
 import { ArtworkDetails } from '@/types/type.ts'
 
-const useFetchArtwork = () => {
-  const { getArtwork, hasError, isLoading } = useArtworksService()
+const ArtItem: React.FC = () => {
   const { id: ParamsId } = useParams<{ id: string }>()
+  const { artworks, hasError, isLoading } = useFetchArtworks(Number(ParamsId))
   const [artwork, setArtwork] = useState<ArtworkDetails | null>(null)
   const { isFavorite } = useContext(FavoritesContext)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getArtwork(Number(ParamsId))
-        setArtwork(data)
-      } catch (error) {
-        console.error(error)
-        throw new Error('Error fetching artwork')
-      }
+    if (artworks) {
+      setArtwork(artworks as ArtworkDetails)
     }
-
-    fetchData()
-  }, [ParamsId, getArtwork])
-
-  return { hasError, isLoading, artwork, isFavorite }
-}
-
-const ArtItem: React.FC = () => {
-  const { hasError, isLoading, artwork, isFavorite } = useFetchArtwork()
+  }, [artworks])
 
   if (isLoading) {
     return <Loader />
@@ -46,15 +32,6 @@ const ArtItem: React.FC = () => {
     return <h1>Artwork not found</h1>
   }
 
-  return <View artwork={artwork} isFavorite={isFavorite} />
-}
-
-interface ViewProps {
-  artwork: ArtworkDetails
-  isFavorite: (id: number) => boolean
-}
-
-const View: React.FC<ViewProps> = ({ artwork, isFavorite }) => {
   const {
     id,
     image_url,
@@ -66,6 +43,7 @@ const View: React.FC<ViewProps> = ({ artwork, isFavorite }) => {
     dimensions,
     place_of_origin
   } = artwork
+
   return (
     <Block>
       <Container>

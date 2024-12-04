@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SearchBar from '@/components/SearchBar/index.tsx'
 import SpecialGallery from '@/components/SpecialGallery/index.tsx'
 import Gallery from '@/components/Gallery/index.tsx'
 import { Block } from '@/style/Pages.styles.ts'
-import { useArtworksService } from '@/services/ArtService.ts'
 import Loader from '@/components/Loader/index.tsx'
-import { Artwork } from '@/types/type.ts'
-
-const useFetchArtworks = () => {
-  const { isLoading, hasError, getArtworks } = useArtworksService()
-  const [artworks, setArtworks] = useState<Artwork[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getArtworks()
-
-        setArtworks(data)
-      } catch (e) {
-        console.error(e)
-      }
-    }
-    fetchData()
-  }, [getArtworks])
-
-  return { isLoading, hasError, artworks }
-}
+import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
 
 const HomePage: React.FC = () => {
   const { isLoading, hasError, artworks } = useFetchArtworks()
@@ -45,7 +24,7 @@ const HomePage: React.FC = () => {
             title="Our special gallery"
             subtitle="Topics for you"
             artworks={artworks}
-          />{' '}
+          />
         </>
       )}
     </Block>

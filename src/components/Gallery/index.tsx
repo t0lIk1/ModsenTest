@@ -1,22 +1,18 @@
-import { useState } from 'react'
+// Gallery.tsx
+import React, { useState } from 'react'
 import { GalleryGrid, GalleryWrapper, TitleWrapper } from './styled.ts'
 import GalleryItem from '@/components/GalleryItem/index.tsx'
 import { Container } from '@/style/Container.styles.ts'
 import NoImg from '@/assets/Group 95.svg'
 import SortButton from '@/components/SortButton/index.tsx'
 import { GalleryProps } from '@/types/type.ts'
+import { PATHS } from '@/constants/paths.ts'
+import { sortArtworks } from '@/utils/sortArtworks.ts'
 
 const Gallery: React.FC<GalleryProps> = ({ title, subtitle, artworks, sortButton }) => {
   const [sortType, setSortType] = useState<'alphabetical' | 'date_display' | 'off'>('off')
 
-  const sortedArtworks = [...artworks].sort((a, b) => {
-    if (sortType === 'alphabetical') {
-      return (a.title || '').localeCompare(b.title || '')
-    } else if (sortType === 'date_display') {
-      return (a.date_display || '').localeCompare(b.date_display || '')
-    }
-    return 0
-  })
+  const sortedArtworks = sortArtworks(artworks, sortType)
 
   return (
     <Container>
@@ -35,7 +31,7 @@ const Gallery: React.FC<GalleryProps> = ({ title, subtitle, artworks, sortButton
               title={item.title}
               artist_title={item.artist_title}
               date_display={item.date_display}
-              to={`/art-item/${item.id}`}
+              to={PATHS.ART_ITEM.replace(':id', String(item.id))}
             />
           ))}
         </GalleryGrid>
