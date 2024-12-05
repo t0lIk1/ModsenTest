@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
+import { undefined } from 'zod'
+
+import { API_URL, ARTIC_IMAGE_URL_TEMPLATE } from '@/constants/constants'
 import { useHttp } from '@/hooks/useHttp'
 import { Artwork, ArtworkData, ArtworkDetails, ArtworkDetailsData } from '@/types/type.ts'
-import { API_URL, ARTIC_IMAGE_URL_TEMPLATE } from '@/constants/constants'
-import { undefined } from 'zod'
 
 export const useArtworksService = () => {
   const { request, isLoading, hasError } = useHttp()
@@ -103,5 +104,34 @@ export const useArtworksService = () => {
     [request]
   )
 
-  return { getArtworks, getArtwork, getSpecialArtworks, searchArtworks, isLoading, hasError }
+  const getArtworksByIds = useCallback(
+    async (ids: number[]): Promise<Artwork[]> => {
+      try {
+        const response = await request(`${API_URL}?ids=${ids.join(',')}`)
+        return response.data.map((data: ArtworkData) => ({
+          id: data.id,
+          title: data.title,
+          artist_title: data.artist_title,
+          image_url: data.image_id
+            ? ARTIC_IMAGE_URL_TEMPLATE.replace('{image_id}', data.image_id)
+            : undefined,
+          date_display: data.date_display
+        }))
+      } catch (error) {
+        console.error('Error fetching artworks:', error)
+        throw error
+      }
+    },
+    [request]
+  )
+
+  return {
+    getArtworksByIds,
+    getArtworks,
+    getArtwork,
+    getSpecialArtworks,
+    searchArtworks,
+    isLoading,
+    hasError
+  }
 }

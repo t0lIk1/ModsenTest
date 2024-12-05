@@ -1,11 +1,13 @@
 // src/components/NavBar/index.tsx
 import { Link, useLocation } from 'react-router-dom'
-import { Logo, Menu, NavBarBlock, NavBarWrapper } from './styled'
-import { Container } from '@/style/Container.styles.ts'
+
+import Home from '@/assets/home.svg'
 import MuseumLogo from '@/assets/museum-logo(white).svg'
 import Favorite from '@/assets/Vector.svg'
-import Home from '@/assets/home.svg'
 import { PATHS } from '@/constants/paths'
+import { Container } from '@/style/Container.styles.ts'
+
+import { Logo, Menu, NavBarBlock, NavBarWrapper } from './styled'
 
 const NavBar: React.FC = () => {
   const location = useLocation()

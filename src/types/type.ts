@@ -63,23 +63,11 @@ export interface IGalleryProps extends Artwork {
 
 export interface FavoriteButtonProps {
   itemId: number
-  title?: string
-  artist_title?: string
-  image_url?: string
-  isFavorite: boolean
-}
-
-export interface Favorite {
-  id?: number
-  title?: string
-  date?: string
-  artist_title?: string
-  image_url?: string
 }
 
 export interface FavoritesContextType {
-  favorites: Favorite[]
-  toggleFavorite: (item: Favorite) => void
+  favoriteIds: number[]
+  toggleFavorite: (itemId: number) => void
   isFavorite: (itemId: number) => boolean
 }
 
@@ -88,4 +76,10 @@ export interface HttpHook {
   hasError: string | null
   request: (url: string, method?: string, body?: BodyInit | null) => Promise<any>
   clearError: () => void
+}
+
+export interface ResultState {
+  favoriteArtworks: Artwork[]
+  isLoading: boolean
+  hasError: string | null
 }

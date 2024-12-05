@@ -1,20 +1,22 @@
 import { useCallback, useEffect, useState } from 'react'
+
 import { useArtworksService } from '@/api/apiService.ts'
 import { Artwork, ArtworkDetails } from '@/types/type'
 
 export const useFetchArtworks = (id?: number, type: string = 'default') => {
   const { isLoading, hasError, getArtwork, getArtworks, getSpecialArtworks } = useArtworksService()
-  const [artworks, setArtworks] = useState<Artwork[] | ArtworkDetails | null>(null)
+  const [artworks, setArtworks] = useState<Artwork[] | null>(null)
+  const [artwork, setArtwork] = useState<ArtworkDetails | null>(null)
 
   const fetchData = useCallback(async () => {
     try {
-      let data
       if (id !== undefined) {
-        data = await getArtwork(id)
+        const data = await getArtwork(id)
+        setArtwork(data)
       } else {
-        data = type === 'special' ? await getSpecialArtworks() : await getArtworks()
+        const data = type === 'special' ? await getSpecialArtworks() : await getArtworks()
+        setArtworks(data)
       }
-      setArtworks(data)
     } catch (e) {
       console.error(e)
     }
@@ -24,5 +26,5 @@ export const useFetchArtworks = (id?: number, type: string = 'default') => {
     fetchData()
   }, [fetchData])
 
-  return { isLoading, hasError, artworks }
+  return { isLoading, hasError, artworks, artwork }
 }

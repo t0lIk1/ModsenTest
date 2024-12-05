@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
+
+import FavoriteButton from '@/components/FavoriteButton/index.tsx'
+import { IGalleryProps } from '@/types/type.ts'
+
 import {
   GalleryDetails,
   GalleryImg,
@@ -7,9 +10,6 @@ import {
   GalleryItemContainer,
   TextDetails
 } from './styled.ts'
-import FavoriteButton from '@/components/FavoriteButton/index.tsx'
-import { FavoritesContext } from '@/components/FavoriteButton/FavoritesContext.tsx'
-import { IGalleryProps } from '@/types/type.ts'
 
 const GalleryItem: React.FC<IGalleryProps> = ({
   image_url,
@@ -19,7 +19,6 @@ const GalleryItem: React.FC<IGalleryProps> = ({
   id,
   to
 }) => {
-  const { isFavorite } = useContext(FavoritesContext)
   return (
     <GalleryItemContainer>
       <Link to={to}>
@@ -34,13 +33,7 @@ const GalleryItem: React.FC<IGalleryProps> = ({
           </GalleryInfo>
         </GalleryDetails>
       </Link>
-      <FavoriteButton
-        itemId={id}
-        title={title}
-        artist_title={artist_title}
-        image_url={image_url}
-        isFavorite={isFavorite(id)}
-      />
+      <FavoriteButton itemId={id} />
     </GalleryItemContainer>
   )
 }

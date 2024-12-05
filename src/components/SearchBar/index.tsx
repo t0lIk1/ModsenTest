@@ -1,11 +1,13 @@
 import React from 'react'
-import { Container } from '@/style/Container.styles'
-import { SearchBarContainer, SearchBarInput, SearchBarInputWrapper, SearchIcon } from './styled'
-import Title from '@/components/Title'
-import Gallery from '@/components/Gallery'
+
 import Search from '@/assets/search.svg'
-import { SearchBarProps } from '@/types/type'
+import Gallery from '@/components/Gallery'
+import Title from '@/components/Title'
 import { useSearchArtworks } from '@/hooks/useSearchArtworks'
+import { Container } from '@/style/Container.styles'
+import { SearchBarProps } from '@/types/type'
+
+import { SearchBarContainer, SearchBarInput, SearchBarInputWrapper, SearchIcon } from './styled'
 
 const SearchBar: React.FC<SearchBarProps> = ({ setIsSearching }) => {
   const { register, handleSubmit, onSubmit, results } = useSearchArtworks(setIsSearching)

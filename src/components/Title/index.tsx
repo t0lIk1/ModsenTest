@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { TitleProps } from '@/types/type.ts'
 
 const TitleContainer = styled.div`

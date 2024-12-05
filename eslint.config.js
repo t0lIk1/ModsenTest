@@ -9,6 +9,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import prettier from 'eslint-plugin-prettier/recommended'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -29,7 +30,9 @@ export default tseslint.config(
       ecmaVersion: 2020,
       globals: globals.browser
     },
+
     plugins: {
+      'simple-import-sort': simpleImportSort,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh
     },
@@ -45,6 +48,8 @@ export default tseslint.config(
       }
     },
     rules: {
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
       'import/extensions': 'off',
       'react/prop-types': 'off',
       'no-console': ['off'],

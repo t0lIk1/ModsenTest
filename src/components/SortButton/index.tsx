@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { SortButtonProps } from '@/types/type.ts'
 
 export const SortWrapper = styled.div`

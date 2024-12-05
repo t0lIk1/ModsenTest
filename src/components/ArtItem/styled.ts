@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { FavoriteBut } from '@/components/FavoriteButton/styled.ts'
 
 export const ArtBlock = styled.div`

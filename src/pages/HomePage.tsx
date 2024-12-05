@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+
+import Gallery from '@/components/Gallery/index.tsx'
+import Loader from '@/components/Loader/index.tsx'
 import SearchBar from '@/components/SearchBar/index.tsx'
 import SpecialGallery from '@/components/SpecialGallery/index.tsx'
-import Gallery from '@/components/Gallery/index.tsx'
-import { Block } from '@/style/Pages.styles.ts'
-import Loader from '@/components/Loader/index.tsx'
 import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
+import { Block } from '@/style/Pages.styles.ts'
 
 const HomePage: React.FC = () => {
   const { isLoading, hasError, artworks } = useFetchArtworks()

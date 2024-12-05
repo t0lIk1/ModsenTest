@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { FooterContainer, FooterWrapper, Logo } from './styled.ts'
-import { Container } from '@/style/Container.styles.ts'
-import MuseumLogo from '@/assets/museum-logo(black).svg'
+
 import ModsenLogo from '@/assets/logo modsen-02 2.svg'
+import MuseumLogo from '@/assets/museum-logo(black).svg'
 import { PATHS } from '@/constants/paths.ts'
+import { Container } from '@/style/Container.styles.ts'
+
+import { FooterContainer, FooterWrapper, Logo } from './styled.ts'
 
 const Footer: React.FC = () => {
   return (

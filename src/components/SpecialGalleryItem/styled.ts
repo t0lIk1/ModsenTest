@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { FavoriteBut } from '../FavoriteButton/styled.ts'
 
 export const GalleryItemContainer = styled.div`

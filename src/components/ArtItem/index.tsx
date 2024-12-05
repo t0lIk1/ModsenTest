@@ -1,26 +1,17 @@
 import { useParams } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { ArtBlock, ArtDetails, ArtImg, ArtInfo, ArtText, ArtTitle } from './styled'
-import { Container } from '@/style/Container.styles.ts'
-import { Block } from '@/style/Pages.styles.ts'
+
 import NoImg from '@/assets/img/NoImg(big).png'
 import FavoriteButton from '@/components/FavoriteButton/index.tsx'
-import { FavoritesContext } from '@/components/FavoriteButton/FavoritesContext.tsx'
 import Loader from '@/components/Loader/index.tsx'
 import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
-import { ArtworkDetails } from '@/types/type.ts'
+import { Container } from '@/style/Container.styles.ts'
+import { Block } from '@/style/Pages.styles.ts'
+
+import { ArtBlock, ArtDetails, ArtImg, ArtInfo, ArtText, ArtTitle } from './styled'
 
 const ArtItem: React.FC = () => {
   const { id: ParamsId } = useParams<{ id: string }>()
-  const { artworks, hasError, isLoading } = useFetchArtworks(Number(ParamsId))
-  const [artwork, setArtwork] = useState<ArtworkDetails | null>(null)
-  const { isFavorite } = useContext(FavoritesContext)
-
-  useEffect(() => {
-    if (artworks) {
-      setArtwork(artworks as ArtworkDetails)
-    }
-  }, [artworks])
+  const { artwork, hasError, isLoading } = useFetchArtworks(Number(ParamsId))
 
   if (isLoading) {
     return <Loader />
@@ -50,13 +41,7 @@ const ArtItem: React.FC = () => {
         <ArtBlock>
           <ArtImg>
             <img src={image_url || NoImg} alt="" />
-            <FavoriteButton
-              itemId={id}
-              title={title}
-              artist_title={artist_title}
-              image_url={image_url || NoImg}
-              isFavorite={isFavorite(id)}
-            />
+            <FavoriteButton itemId={id} />
           </ArtImg>
           <ArtInfo>
             <ArtTitle>

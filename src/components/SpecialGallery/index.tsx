@@ -1,5 +1,13 @@
 import { useState } from 'react'
+
+import NoImg from '@/assets/Group 95.svg'
+import Pagination from '@/components/Pagination/index.tsx'
+import SpecialGalleryItem from '@/components/SpecialGalleryItem/index.tsx'
+import { itemsPerPage } from '@/constants/constants.ts'
+import { PATHS } from '@/constants/paths.ts'
+import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
 import { Container } from '@/style/Container.styles.ts'
+
 import {
   GalleryGrid,
   GallerySection,
@@ -7,23 +15,28 @@ import {
   PaginationWrapper,
   TitleWrapper
 } from './styled.ts'
-import SpecialGalleryItem from '@/components/SpecialGalleryItem/index.tsx'
-import Pagination from '@/components/Pagination/index.tsx'
-import NoImg from '@/assets/Group 95.svg'
-import { itemsPerPage } from '@/constants/constants.ts'
-import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
-import { PATHS } from '@/constants/paths.ts'
 
 const SpecialGallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const { artworks } = useFetchArtworks('special') // добавить isLoadeing и haserror
-  const totalPages = Math.ceil(artworks.length / itemsPerPage)
-  const currentItems = artworks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const { artworks, isLoading, hasError } = useFetchArtworks(undefined, 'special')
+  const totalPages = artworks ? Math.ceil(artworks.length / itemsPerPage) : 0
+  const currentItems = artworks
+    ? artworks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    : []
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return
     setCurrentPage(page)
   }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (hasError) {
+    return <div>Error loading artworks</div>
+  }
+
   return (
     <GallerySection>
       <Container>

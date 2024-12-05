@@ -1,36 +1,46 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { Favorite, FavoritesContextType } from '@/types/type.ts'
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
+import { FavoritesContextType } from '@/types/type.ts'
+
+const FavoritesContext = createContext<FavoritesContextType | null>(null)
 
 const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [favorites, setFavorites] = useState<Favorite[]>(() => {
-    const storedFavorites = localStorage.getItem('favorites')
-    return storedFavorites ? JSON.parse(storedFavorites) : []
+  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => {
+    try {
+      const storedFavoriteIds = localStorage.getItem('favoriteIds')
+      return storedFavoriteIds ? JSON.parse(storedFavoriteIds) : []
+    } catch (error) {
+      console.error('Error reading favoriteIds from localStorage:', error)
+      return []
+    }
   })
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites])
+    try {
+      localStorage.setItem('favoriteIds', JSON.stringify(favoriteIds))
+    } catch (error) {
+      console.error('Error saving favoriteIds to localStorage:', error)
+    }
+  }, [favoriteIds])
 
-  const toggleFavorite = (item: Favorite) => {
-    setFavorites((prevFavorites) => {
-      const isFavorite = prevFavorites.some((fav) => fav.id === item.id)
-      return isFavorite
-        ? prevFavorites.filter((fav) => fav.id !== item.id)
-        : [...prevFavorites, item]
-    })
-  }
+  const toggleFavorite = useCallback((itemId: number) => {
+    setFavoriteIds((prevFavoriteIds) =>
+      prevFavoriteIds.includes(itemId)
+        ? prevFavoriteIds.filter((id) => id !== itemId)
+        : [...prevFavoriteIds, itemId]
+    )
+  }, [])
 
-  const isFavorite = (itemId: number) => {
-    return favorites.some((fav) => fav.id === itemId)
-  }
-
-  return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
-      {children}
-    </FavoritesContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      favoriteIds,
+      toggleFavorite,
+      isFavorite: (itemId: number) => favoriteIds.includes(itemId)
+    }),
+    [favoriteIds, toggleFavorite]
   )
+
+  return <FavoritesContext.Provider value={contextValue}>{children}</FavoritesContext.Provider>
 }
 
 export { FavoritesContext, FavoritesProvider }

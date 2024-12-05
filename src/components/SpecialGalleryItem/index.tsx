@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
-import { GalleryDetails, GalleryImg, GalleryItemContainer, TextDetails } from './styled.ts'
+
 import FavoriteButton from '@/components/FavoriteButton/index.tsx'
-import { FavoritesContext } from '@/components/FavoriteButton/FavoritesContext.tsx'
 import { IGalleryProps } from '@/types/type.ts'
+
+import { GalleryDetails, GalleryImg, GalleryItemContainer, TextDetails } from './styled.ts'
 
 const SpecialGalleryItem: React.FC<IGalleryProps> = ({
   image_url,
@@ -13,12 +13,11 @@ const SpecialGalleryItem: React.FC<IGalleryProps> = ({
   id,
   to
 }) => {
-  const { isFavorite } = useContext(FavoritesContext)
   return (
     <GalleryItemContainer>
       <Link to={to}>
         <GalleryDetails>
-          <GalleryImg src={image_url} />
+          <GalleryImg src={image_url} alt={title} />
           <TextDetails>
             <h3>{title}</h3>
             <span>{artist_title}</span>
@@ -26,13 +25,7 @@ const SpecialGalleryItem: React.FC<IGalleryProps> = ({
           </TextDetails>
         </GalleryDetails>
       </Link>
-      <FavoriteButton
-        itemId={id}
-        title={title}
-        artist_title={artist_title}
-        image_url={image_url}
-        isFavorite={isFavorite(id)}
-      />
+      <FavoriteButton itemId={id} />
     </GalleryItemContainer>
   )
 }
