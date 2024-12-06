@@ -7,55 +7,64 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import prettier from 'eslint-plugin-prettier/recommended'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    // specify the formats on which to apply the rules below
     files: ['**/*.{ts,tsx}'],
-    // use predefined configs in installed eslint plugins
     extends: [
-      // js
       js.configs.recommended,
-      // ts
       ...tseslint.configs.recommended,
-      // react
       react.configs.flat.recommended,
-      // import
       importPlugin.flatConfigs.recommended,
-      // a11y (accessibility
       jsxA11y.flatConfigs.recommended,
-      // prettier
       prettier
     ],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser
     },
-    // specify used plugins
+
     plugins: {
+      'simple-import-sort': simpleImportSort,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh
     },
     settings: {
-      // for eslint-plugin-react to auto detect react version
       react: {
         version: 'detect'
       },
-      // for eslint-plugin-import to use import alias
       'import/resolver': {
-        typescript: {
-          project: './tsconfig.json'
+        alias: {
+          map: [['@', './src']],
+          extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
         }
       }
     },
     rules: {
-      // set of custom rules
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto'
+        }
+      ],
+
+      '@typescript-eslint/no-unused-vars': 'off',
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+      'import/extensions': 'off',
+      'react/prop-types': 'off',
       'no-console': ['off'],
       'react/button-has-type': 'error',
       'react/react-in-jsx-scope': ['off'],
       '@typescript-eslint/no-explicit-any': ['off'],
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]
+      'react-refresh/only-export-components': 'off'
     }
   }
 )

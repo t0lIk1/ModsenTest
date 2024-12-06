@@ -107,7 +107,6 @@ meter {
   -webkit-user-drag: element;
 }
 
-
 /* Remove details summary webkit styles */
 ::-webkit-details-marker {
   display: none;

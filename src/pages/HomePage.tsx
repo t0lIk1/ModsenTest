@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import SearchBar from '../components/SearchBar/SearchBar.tsx'
-import SpecialGallery from '../components/SpecialGallery/SpecialGallery.tsx'
-import Gallery from '../components/Gallery/Gallery.tsx'
-import { Block } from '../style/Pages.styles.js'
-import { useArtworksService } from '../services/ArtService.ts'
-import Loader from '../components/Loader/Loader.tsx'
+import { useState } from 'react'
 
-interface Artwork {
-  id: number
-  title: string
-  artist_title: string
-  image_url?: string
-  date_display?: string
-}
-
-const useFetchArtworks = () => {
-  const { isLoading, hasError, getArtworks } = useArtworksService()
-  const [artworks, setArtworks] = useState<Artwork[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getArtworks()
-
-        setArtworks(data)
-      } catch (e) {
-        console.error(e)
-      }
-    }
-    fetchData()
-  }, [getArtworks])
-
-  return { isLoading, hasError, artworks }
-}
+import Gallery from '@/components/Gallery/index.tsx'
+import Loader from '@/components/Loader/index.tsx'
+import SearchBar from '@/components/SearchBar/index.tsx'
+import SpecialGallery from '@/components/SpecialGallery/index.tsx'
+import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
+import { Block } from '@/style/common.styles.ts'
 
 const HomePage: React.FC = () => {
   const { isLoading, hasError, artworks } = useFetchArtworks()
@@ -43,7 +16,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Block>
-      <SearchBar setIsSearching={setIsSearching} />
+      <SearchBar setIsSearching={setIsSearching} isSearching={isSearching} />
       {!isSearching && (
         <>
           <SpecialGallery />
@@ -52,7 +25,7 @@ const HomePage: React.FC = () => {
             title="Our special gallery"
             subtitle="Topics for you"
             artworks={artworks}
-          />{' '}
+          />
         </>
       )}
     </Block>
