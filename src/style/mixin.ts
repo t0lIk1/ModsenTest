@@ -1,4 +1,3 @@
-// src/styles/mixins.ts
 import { css } from 'styled-components'
 
 export const flexCenter = css`
@@ -7,11 +6,25 @@ export const flexCenter = css`
   align-items: center;
 `
 
-export const boxShadow = css`
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+export const flexSpaceBetween = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
-export const textStyle = css`
-  font-size: 16px;
+export const hoverEffect = css`
+  &:hover {
+    color: ${({ theme }) => theme.colors.hover};
+    transition: color 0.3s ease-in-out;
+  }
+`
+
+export const textBasic = css`
+  font-size: 1rem;
   color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fontFamily.basic};
+`
+
+export const boxShadow = css`
+  box-shadow: ${({ theme }) => theme.shadows.basic};
 `

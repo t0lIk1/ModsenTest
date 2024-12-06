@@ -28,6 +28,15 @@ export const usePagination = (totalItems: number, itemsPerPage: number) => {
     }
   }
 
+  const handlePreviousClick = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+      if (currentPage - 1 < startPage) {
+        setStartPage(startPage - 1)
+      }
+    }
+  }
+
   const pageNumbers = () => {
     const pages = []
     for (let i = startPage; i < startPage + maxPagesToShow && i <= totalPages; i++) {
@@ -36,5 +45,13 @@ export const usePagination = (totalItems: number, itemsPerPage: number) => {
     return pages
   }
 
-  return { currentPage, totalPages, currentItems, handlePageChange, handleNextClick, pageNumbers }
+  return {
+    currentPage,
+    totalPages,
+    currentItems,
+    handlePageChange,
+    handleNextClick,
+    handlePreviousClick,
+    pageNumbers
+  }
 }

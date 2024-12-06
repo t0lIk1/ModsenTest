@@ -59,6 +59,9 @@ export const PaginationWrapper = styled.div`
       background: transparent;
       cursor: pointer;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:disabled {
         background-color: #ddd;

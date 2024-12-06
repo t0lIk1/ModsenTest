@@ -6,10 +6,14 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   pageNumbers,
   onPageChange,
-  onNextClick
+  onNextClick,
+  onPreviousClick
 }) => {
   return (
     <div className="pagination">
+      <button type="button" onClick={onPreviousClick} disabled={currentPage <= 1}>
+        <img src={NextButton} alt="previous" style={{ transform: 'rotate(180deg)' }} />
+      </button>
       {pageNumbers.map((number) => (
         <button
           type="button"
@@ -20,7 +24,6 @@ const Pagination: React.FC<PaginationProps> = ({
           {number}
         </button>
       ))}
-      {/* Next button */}
       <button type="button" onClick={onNextClick} disabled={currentPage >= totalPages}>
         <img src={NextButton} alt="next" />
       </button>

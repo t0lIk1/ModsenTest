@@ -11,6 +11,7 @@ export const Pagination = styled.div`
     color: white;
     border: none;
     cursor: pointer;
+
     &:disabled {
       background-color: #ccc;
     }
@@ -27,6 +28,6 @@ export const PaginationWrapper = styled.div`
 `
 
 export const GalleryItemWrapper = styled.div`
-  flex: 0 0 33.33%; /* Show 3 items per row */
+  flex: 0 0 33.33%;
   padding: 10px;
 `

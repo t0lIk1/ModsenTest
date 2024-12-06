@@ -3,7 +3,7 @@ import Gallery from '@/components/Gallery'
 import Loader from '@/components/Loader/index.tsx'
 import Title from '@/components/Title'
 import { useSearchArtworks } from '@/hooks/useSearchArtworks'
-import { Container } from '@/style/Container.styles'
+import { Container } from '@/style/common.styles.ts'
 import { SearchBarProps } from '@/types/type'
 
 import {

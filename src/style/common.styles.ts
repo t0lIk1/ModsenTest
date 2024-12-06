@@ -5,6 +5,9 @@ export const Container = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   box-sizing: border-box;
+  @media (max-width: 1300px) {
+    padding: 0 10px;
+  }
 `
 export const Block = styled.div`
   font-family: 'Lexend Deca', sans-serif;

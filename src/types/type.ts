@@ -24,6 +24,7 @@ export interface PaginationProps {
   pageNumbers: number[]
   onPageChange: (page: number) => void
   onNextClick: () => void
+  onPreviousClick: () => void
 }
 
 export interface SortButtonProps {
@@ -86,4 +87,12 @@ export interface ResultState {
   favoriteArtworks: Artwork[]
   isLoading: boolean
   hasError: string | null
+}
+
+export interface Props {
+  children: ReactNode
+}
+
+export interface State {
+  hasError: boolean
 }

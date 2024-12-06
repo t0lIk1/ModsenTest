@@ -2,8 +2,8 @@ import FavoriteIcon from '@/assets/Favorite(orange).svg'
 import Gallery from '@/components/Gallery'
 import Loader from '@/components/Loader'
 import Title from '@/components/Title'
-import { useFetchFavoriteArtworks } from '@/hooks/useFetchFavoriteArtworks' // Хук
-import { Block } from '@/style/Pages.styles'
+import { useFetchFavoriteArtworks } from '@/hooks/useFetchFavoriteArtworks'
+import { Block } from '@/style/common.styles.ts' // Хук
 
 const FavoritePage: React.FC = () => {
   const { favoriteArtworks, isLoading, hasError } = useFetchFavoriteArtworks()

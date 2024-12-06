@@ -5,14 +5,20 @@ import { FavoriteBut } from '@/components/FavoriteButton/styled.ts'
 export const ArtBlock = styled.div`
   display: flex;
   gap: 80px;
+  @media (max-width: 1100px) {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const ArtImg = styled.div`
     position: relative;
-
+    max-width: 497px;
+    max-height: 570px;
     img {
-        max-width: 497px;
-        max-height: 570px;
+        width: 100%;
+        
     }
 }
 

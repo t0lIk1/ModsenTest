@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import ModsenLogo from '@/assets/logo modsen-02 2.svg'
 import MuseumLogo from '@/assets/museum-logo(black).svg'
 import { PATHS } from '@/constants/paths.ts'
-import { Container } from '@/style/Container.styles.ts'
+import { Container } from '@/style/common.styles.ts'
 
 import { FooterContainer, FooterWrapper, Logo } from './styled.ts'
 

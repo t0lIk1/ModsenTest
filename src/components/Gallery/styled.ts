@@ -37,4 +37,11 @@ export const GalleryGrid = styled.div`
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
   }
+
+  @media (max-width: 1300px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `

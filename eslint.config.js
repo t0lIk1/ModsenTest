@@ -48,6 +48,7 @@ export default tseslint.config(
       }
     },
     rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'import/extensions': 'off',
