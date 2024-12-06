@@ -7,12 +7,12 @@ export const SearchBarContainer = styled.div`
   gap: 72px;
 `
 
-export const SearchBarInputWrapper = styled.div`
+export const SearchBarInputWrapper = styled.form`
   position: relative;
   width: 100%;
 `
 
-export const SearchBarInput = styled.input`
+export const SearchBarInput = styled.input<{ hasError?: boolean }>`
   padding: 16px 16px 16px 64px;
   border-radius: 16px;
   width: 100%;
@@ -21,10 +21,14 @@ export const SearchBarInput = styled.input`
   font-weight: 400;
   font-size: 14px;
   text-transform: capitalize;
+  border: 2px solid ${({ hasError }) => (hasError ? 'red' : 'transparent')};
+  outline: none;
 
   &::placeholder {
     color: rgba(57, 57, 57, 0.5);
   }
+
+  transition: 0.3s ease-in-out border-color;
 `
 
 export const SearchIcon = styled.img`
@@ -35,4 +39,7 @@ export const SearchIcon = styled.img`
   width: 24px;
   height: 24px;
   pointer-events: none;
+`
+export const SearchBarInputContainer = styled.div`
+  position: relative;
 `

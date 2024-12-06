@@ -1,12 +1,13 @@
-import { useState } from 'react'
-
 import NoImg from '@/assets/Group 95.svg'
+import Loader from '@/components/Loader/index.tsx'
 import Pagination from '@/components/Pagination/index.tsx'
 import SpecialGalleryItem from '@/components/SpecialGalleryItem/index.tsx'
-import { itemsPerPage } from '@/constants/constants.ts'
 import { PATHS } from '@/constants/paths.ts'
 import { useFetchArtworks } from '@/hooks/useFetchArtwork.ts'
+import { usePagination } from '@/hooks/usePagination'
+import useResponsiveItems from '@/hooks/useResponsiveItems.ts'
 import { Container } from '@/style/Container.styles.ts'
+import { Artwork } from '@/types/type.ts'
 
 import {
   GalleryGrid,
@@ -17,20 +18,14 @@ import {
 } from './styled.ts'
 
 const SpecialGallery: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = useResponsiveItems()
   const { artworks, isLoading, hasError } = useFetchArtworks(undefined, 'special')
-  const totalPages = artworks ? Math.ceil(artworks.length / itemsPerPage) : 0
-  const currentItems = artworks
-    ? artworks.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-    : []
 
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPages) return
-    setCurrentPage(page)
-  }
+  const { currentPage, totalPages, currentItems, handlePageChange, handleNextClick, pageNumbers } =
+    usePagination(artworks ? artworks.length : 0, itemsPerPage)
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   if (hasError) {
@@ -46,24 +41,27 @@ const SpecialGallery: React.FC = () => {
             <span>Our Special Gallery</span>
           </TitleWrapper>
           <GalleryGrid>
-            {currentItems.map((item) => (
-              <SpecialGalleryItem
-                key={item.id}
-                id={item.id}
-                image_url={item.image_url || NoImg}
-                title={item.title}
-                artist_title={item.artist_title}
-                date_display={item.date_display}
-                to={PATHS.ART_ITEM.replace(':id', String(item.id))}
-              />
-            ))}
+            {artworks &&
+              currentItems(artworks).map((item: Artwork) => (
+                <SpecialGalleryItem
+                  key={item.id}
+                  id={item.id}
+                  image_url={item.image_url || NoImg}
+                  title={item.title}
+                  artist_title={item.artist_title}
+                  date_display={item.date_display}
+                  to={PATHS.ART_ITEM.replace(':id', String(item.id))}
+                />
+              ))}
           </GalleryGrid>
         </GalleryWrapper>
         <PaginationWrapper>
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
+            pageNumbers={pageNumbers()}
             onPageChange={handlePageChange}
+            onNextClick={handleNextClick}
           />
         </PaginationWrapper>
       </Container>

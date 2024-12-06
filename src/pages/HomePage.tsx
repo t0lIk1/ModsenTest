@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import Gallery from '@/components/Gallery/index.tsx'
 import Loader from '@/components/Loader/index.tsx'
@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
 
   return (
     <Block>
-      <SearchBar setIsSearching={setIsSearching} />
+      <SearchBar setIsSearching={setIsSearching} isSearching={isSearching} />
       {!isSearching && (
         <>
           <SpecialGallery />

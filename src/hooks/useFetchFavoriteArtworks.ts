@@ -6,7 +6,7 @@ import { Artwork, ResultState } from '@/types/type.ts'
 
 export const useFetchFavoriteArtworks = (): ResultState => {
   const { getArtworksByIds, isLoading, hasError } = useArtworksService()
-  const [favoriteArtworks, setFavoriteArtworks] = useState<Artwork[] | undefined>()
+  const [favoriteArtworks, setFavoriteArtworks] = useState<Artwork[]>([])
   const context = useContext(FavoritesContext)
 
   if (!context) {

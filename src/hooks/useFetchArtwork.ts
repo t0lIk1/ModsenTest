@@ -5,8 +5,8 @@ import { Artwork, ArtworkDetails } from '@/types/type'
 
 export const useFetchArtworks = (id?: number, type: string = 'default') => {
   const { isLoading, hasError, getArtwork, getArtworks, getSpecialArtworks } = useArtworksService()
-  const [artworks, setArtworks] = useState<Artwork[] | null>(null)
-  const [artwork, setArtwork] = useState<ArtworkDetails | null>(null)
+  const [artworks, setArtworks] = useState<Artwork[]>([])
+  const [artwork, setArtwork] = useState<ArtworkDetails>()
 
   const fetchData = useCallback(async () => {
     try {
@@ -14,7 +14,7 @@ export const useFetchArtworks = (id?: number, type: string = 'default') => {
         const data = await getArtwork(id)
         setArtwork(data)
       } else {
-        const data = type === 'special' ? await getSpecialArtworks() : await getArtworks()
+        const data = type === 'special' ? await getSpecialArtworks(12, 101) : await getArtworks()
         setArtworks(data)
       }
     } catch (e) {

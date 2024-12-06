@@ -30,5 +30,5 @@ export const useHttp = (): HttpHook => {
 
   const clearError = useCallback(() => setError(null), [])
 
-  return { isLoading, hasError, request, clearError }
+  return { isLoading, hasError, setLoading, request, clearError }
 }

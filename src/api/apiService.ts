@@ -1,13 +1,11 @@
 import { useCallback } from 'react'
-import { undefined } from 'zod'
 
 import { API_URL, ARTIC_IMAGE_URL_TEMPLATE } from '@/constants/constants'
 import { useHttp } from '@/hooks/useHttp'
 import { Artwork, ArtworkData, ArtworkDetails, ArtworkDetailsData } from '@/types/type.ts'
 
 export const useArtworksService = () => {
-  const { request, isLoading, hasError } = useHttp()
-
+  const { request, isLoading, setLoading, hasError } = useHttp()
   const getArtworks = useCallback(
     async (limit = 9): Promise<ArtworkData[]> => {
       try {
@@ -60,9 +58,9 @@ export const useArtworksService = () => {
   )
 
   const getSpecialArtworks = useCallback(
-    async (limit: number = 12): Promise<Artwork[]> => {
+    async (limit: number = 12, page: number): Promise<Artwork[]> => {
       try {
-        const response = await request(`${API_URL}?limit=${limit}&boost_rank=1`)
+        const response = await request(`${API_URL}?limit=${limit}&page=${page}`)
         return response.data.map((data: ArtworkData) => ({
           id: data.id,
           title: data.title,
@@ -86,7 +84,6 @@ export const useArtworksService = () => {
         const response = await request(
           `${API_URL}/search?q=${query}&fields=date_display,id,title,image_id,artist_title,lqip`
         )
-
         return response.data.map((data: ArtworkData) => ({
           id: data.id,
           title: data.title,
@@ -106,6 +103,10 @@ export const useArtworksService = () => {
 
   const getArtworksByIds = useCallback(
     async (ids: number[]): Promise<Artwork[]> => {
+      if (!ids.length) {
+        setLoading(false)
+        return []
+      }
       try {
         const response = await request(`${API_URL}?ids=${ids.join(',')}`)
         return response.data.map((data: ArtworkData) => ({

@@ -14,13 +14,16 @@ export interface GalleryProps {
 }
 
 export interface SearchBarProps {
+  isSearching: boolean
   setIsSearching: (isSearching: boolean) => void
 }
 
 export interface PaginationProps {
   currentPage: number
   totalPages: number
+  pageNumbers: number[]
   onPageChange: (page: number) => void
+  onNextClick: () => void
 }
 
 export interface SortButtonProps {
@@ -74,6 +77,7 @@ export interface FavoritesContextType {
 export interface HttpHook {
   isLoading: boolean
   hasError: string | null
+  setLoading: (loading: boolean) => void
   request: (url: string, method?: string, body?: BodyInit | null) => Promise<any>
   clearError: () => void
 }

@@ -13,8 +13,18 @@ const FavoritePage: React.FC = () => {
 
   return (
     <Block>
-      <Title mainText="Here Are Your" subText="Favorites" icon={FavoriteIcon} />
-      <Gallery title="Favorites" subtitle="Your favorite artworks" artworks={favoriteArtworks} />
+      {favoriteArtworks.length > 0 ? (
+        <>
+          <Title mainText="Here Are Your" subText="Favorites" icon={FavoriteIcon} />
+          <Gallery
+            title="Favorites"
+            subtitle="Your favorite artworks"
+            artworks={favoriteArtworks}
+          />
+        </>
+      ) : (
+        <Title mainText="you don't have any " subText="Favorites" icon={FavoriteIcon} />
+      )}
     </Block>
   )
 }
